@@ -1,0 +1,30 @@
+@import '../Variables/Variables.scss';
+
+.container {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.navbar {
+  width: 100%;
+  height: 70px;
+  background-color: $darkBrown;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+
+  a {
+    color: white;
+    font-size: 32px;
+    text-decoration: none;
+    font-family: $titleFont;
+    font-weight: bold;
+  }
+
+  img {
+    width: 65px;
+    height: 65px;
+  }
+}
