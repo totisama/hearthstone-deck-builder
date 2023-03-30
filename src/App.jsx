@@ -1,7 +1,9 @@
+import { NavBar } from './Components/NavBar'
+
 function App () {
   return (
     <div>
-      Hearthstone deck builder
+      <NavBar />
     </div>
   )
 }
