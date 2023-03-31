@@ -1,10 +1,15 @@
-import { NavBar } from './Components/NavBar'
+import NavBar from './Components/Navbar'
+import Cards from './Components/Cards'
+import { Route, Routes } from 'react-router-dom'
 
 function App () {
   return (
-    <div>
+    <main>
       <NavBar />
-    </div>
+      <Routes>
+        <Route path='/' element={<Cards />} />
+      </Routes>
+    </main>
   )
 }
 

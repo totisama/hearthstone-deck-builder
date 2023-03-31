@@ -1,14 +1,17 @@
 import '../Styles/NavBar.scss'
 import hearthstoneLogo from '../Assets/hearthstone.webp'
+import { Link } from 'react-router-dom'
 
-export const NavBar = () => {
+const NavBar = () => {
   return (
-    <main className='container'>
+    <section className='container'>
       <div className='navbar'>
-        <a href='/'>Cards Library</a>
+        <Link to='/'>Cards Library</Link>
         <img src={hearthstoneLogo} alt='Hearthstone logo' />
-        <a href='/deck-builder'>Deck Builder</a>
+        <Link to='/'>Deck Builder</Link>
       </div>
-    </main>
+    </section>
   )
 }
+
+export default NavBar
