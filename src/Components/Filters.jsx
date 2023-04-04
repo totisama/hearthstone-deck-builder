@@ -1,11 +1,7 @@
 import '../Styles/Filters.scss'
-import { MANA_COSTS } from '../constants'
+import ManaFilter from './ManaFilter'
 
 const Filters = () => {
-  const setMana = (event) => {
-    console.log(event.target.value)
-  }
-
   return (
     <section className='filters'>
       <select>
@@ -16,13 +12,7 @@ const Filters = () => {
         <option value='all-classes'>All Classes</option>
         <option value='death-knight'>Death Knight</option>
       </select>
-      <div className='mana'>
-        {MANA_COSTS.map((mana) => (
-          <button className='manaIcon' value={mana.value} key={mana.value} onClick={setMana}>
-            {mana.label}
-          </button>
-        ))}
-      </div>
+      <ManaFilter />
       <input type='text' placeholder='Search' />
     </section>
   )
