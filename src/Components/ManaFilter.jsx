@@ -1,10 +1,10 @@
 
 import { MANA_COSTS, MANA_COSTS_SELECT } from '../constants'
 import '../Styles/ManaFilter.scss'
-import { useResize } from './hooks/useResize'
+import { useResizeWindow } from './hooks/useResizeWindow'
 
 const ManaFilter = () => {
-  const { isDesktop } = useResize()
+  const { isDesktop } = useResizeWindow()
 
   const setMana = (event) => {
     console.log(event.target.value)
