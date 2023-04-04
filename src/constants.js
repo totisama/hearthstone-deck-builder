@@ -11,3 +11,7 @@ export const MANA_COSTS = [
   { value: 9, label: '9' },
   { value: 10, label: '10+' }
 ]
+
+export const API_HOSTS = 'https://us.api.blizzard.com/hearthstone/cards'
+
+export const DEFAULT_LOCALE = 'en_US'
