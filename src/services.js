@@ -2,15 +2,14 @@ import { API_HOSTS, DEFAULT_LOCALE } from './constants'
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
-console.log(cookies)
 
 const getToken = async () => {
   const existingToken = cookies.get('token')
-  console.log('existingToken', existingToken)
+  // console.log('existingToken', existingToken)
 
   if (existingToken) return existingToken
 
-  console.log('pasa')
+  // console.log('pasa')
   const formData = new FormData()
 
   formData.append('grant_type', 'client_credentials')
@@ -22,7 +21,7 @@ const getToken = async () => {
     body: formData
   })
   const token = await response.json()
-  console.log(token)
+  // console.log(token)
 
   cookies.set('token', token.access_token, { path: '/', maxAge: token.expires_in })
 
@@ -36,5 +35,7 @@ export const getCards = async () => {
   const response = await fetch(`${API_HOSTS}?${queryParams}`, { headers })
   const data = await response.json()
 
-  console.log('response', data)
+  console.log('data', data)
+
+  return data
 }
