@@ -30,3 +30,9 @@ export const MANA_COSTS_SELECT = [
 export const API_HOSTS = 'https://us.api.blizzard.com/hearthstone/cards'
 
 export const DEFAULT_LOCALE = 'en_US'
+
+export const XS = 256
+export const SM = 512
+export const MD = 768
+export const LG = 1024
+export const XL = 1280
