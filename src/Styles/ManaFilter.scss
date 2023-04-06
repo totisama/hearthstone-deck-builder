@@ -1,14 +1,12 @@
 @import '../Variables/Variables.scss';
 
 .manaFilter {
-  width: auto;
   height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 
   select {
-    width: 100%;
     height: 40%;
     border-radius: 50px;
     padding-left: 5px;
@@ -18,6 +16,10 @@
     font-family: $normalFont;
     font-weight: bold;
     font-size: 18px;
+  }
+
+  select.hidden {
+    display: none;
   }
 }
 
@@ -50,4 +52,12 @@ select:hover {
 .manaIcon:focus,
 select:focus {
   outline: none;
+}
+
+@media (min-width: $MD) {
+  .manaFilter {
+    select.hidden {
+      display: block;
+    }
+  }
 }

@@ -23,7 +23,7 @@ const ManaFilter = () => {
           </div>
           )
         : (
-          <select className='manaSelect'>
+          <select className='hidden'>
             {MANA_COSTS_SELECT.map((mana) => (
               <option value={mana.value} key={mana.value}>{mana.label}</option>
             ))}
