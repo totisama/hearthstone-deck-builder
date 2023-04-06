@@ -4,7 +4,7 @@ import '../Styles/ManaFilter.scss'
 import { useResizeWindow } from './../hooks/useResizeWindow'
 
 const ManaFilter = () => {
-  const { isDesktop } = useResizeWindow()
+  const { screenSize } = useResizeWindow()
 
   const setMana = (event) => {
     console.log(event.target.value)
@@ -12,7 +12,7 @@ const ManaFilter = () => {
 
   return (
     <div className='manaFilter'>
-      {isDesktop
+      {screenSize === 'LG'
         ? (
           <div className='mana'>
             {MANA_COSTS.map((mana) => (
