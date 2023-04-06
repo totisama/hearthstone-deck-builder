@@ -1,17 +1,28 @@
 import { useState, useEffect } from 'react'
+import { XL, MD } from '../constants'
 
 export const useResizeWindow = () => {
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024)
+  const [screenSize, setScreenSize] = useState()
 
   const updateMedia = () => {
-    setIsDesktop(window.innerWidth > 1024)
+    const windowSize = window.innerWidth
+    let size = 'LG'
+
+    if (windowSize < XL && windowSize > MD) {
+      size = 'MD'
+    } else if (windowSize <= MD) {
+      size = 'SM'
+    }
+
+    setScreenSize(size)
   }
 
   useEffect(() => {
+    updateMedia()
     window.addEventListener('resize', updateMedia)
 
     return () => window.removeEventListener('resize', updateMedia)
   }, [])
 
-  return { isDesktop }
+  return { screenSize }
 }
