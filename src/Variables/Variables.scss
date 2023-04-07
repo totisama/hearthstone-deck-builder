@@ -1,4 +1,4 @@
-// Colors
+/* Colors */
 $white: #FFF;
 $black: #000;
 $pageBackgroundColor: #E5D5AD;
@@ -10,6 +10,37 @@ $lightBorder: #E2D796;
 $textColor: #5D442B;
 
 
-// Fonts
+/* Fonts */
 $titleFont: Arial, Helvetica, sans-serif;
 $normalFont: "Times New Roman", Times, serif;
+
+/* Breakpoints value */
+$XS: 256px;
+$SM: 512px;
+$MD: 768px;
+$LG: 1024px;
+$XL: 1280px;
+
+/* Mixins */
+@mixin navbarStyle($gap) {
+  height: 70px;
+  background-color: $darkBrown;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
+}
+
+@mixin anchorStyle($fontSize) {
+  color: $white;
+  font-size: $fontSize;
+  text-decoration: none;
+  font-family: $titleFont;
+  font-weight: bold;
+}
+
+@mixin imageStyle($size) {
+  width: $size;
+  height: $size;
+}

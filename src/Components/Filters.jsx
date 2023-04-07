@@ -1,29 +1,26 @@
 import '../Styles/Filters.scss'
-import { MANA_COSTS } from '../constants'
+import ManaFilter from './ManaFilter'
 
 const Filters = () => {
-  const setMana = (event) => {
-    console.log(event.target.value)
-  }
-
   return (
     <section className='filters'>
-      <select>
-        <option value='standard-cards'>Standard Cards</option>
-        <option value='path-of-arthas'>Path of Arthas</option>
-      </select>
-      <select>
-        <option value='all-classes'>All Classes</option>
-        <option value='death-knight'>Death Knight</option>
-      </select>
-      <div className='mana'>
-        {MANA_COSTS.map((mana) => (
-          <button className='manaIcon' value={mana.value} key={mana.value} onClick={setMana}>
-            {mana.label}
-          </button>
-        ))}
+      <div className='mainFilters'>
+        <div className='inputFilters'>
+          <select className='hidden'>
+            <option value='standard-cards'>Standard Cards</option>
+            <option value='path-of-arthas'>Path of Arthas</option>
+          </select>
+          <select className='hidden'>
+            <option value='all-classes'>All Classes</option>
+            <option value='death-knight'>Death Knight</option>
+          </select>
+          <ManaFilter />
+          <input type='text' placeholder='Search' />
+        </div>
+        <div className='subFiltersbutton'>
+          <button>More Filters</button>
+        </div>
       </div>
-      <input type='text' placeholder='Search' />
     </section>
   )
 }

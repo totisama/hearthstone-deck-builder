@@ -1,18 +1,27 @@
 @import '../Variables/Variables.scss';
 
 .filters {
-  height: 100px;
+  height: auto;
   background-color: $maroon;
+  border: 2px solid rgba(50, 50, 93, 0.25);
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+.mainFilters {
+  height: 100px;
+  display: flex;
+  background-color: $maroon;
+  padding: 0px 20px;
+}
+
+.inputFilters {
+  width: 65%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 15px;
-  padding-left: 20px;
-  border: 2px solid rgba(50, 50, 93, 0.25);
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  gap: 5px;
 
   select {
-    width: 15%;
     height: 40%;
     border-radius: 50px;
     padding-left: 5px;
@@ -24,8 +33,13 @@
     font-size: 18px;
   }
 
+  select.hidden {
+    display: none;
+  }
+
   input {
-    width: 15%;
+    width: 100%;
+    max-width: 200px;
     height: 30%;
     border-radius: 50px;
     padding-left: 15px;
@@ -34,43 +48,70 @@
     color: $white;
     font-family: $normalFont;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 14px;
   }
 
   select:focus,
-  input:focus,
-  .manaIcon:focus {
+  input:focus {
     outline: none;
   }
 }
 
-.mana {
-  width: auto;
-  height: 35%;
-  border-radius: 50px;
-  background-color: $darkMaroon;
-  border: 4px solid $lightBorder;
+.subFiltersbutton {
+  width: 35%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
-  padding: 0px 10px;
+
+  button {
+    border-radius: 50px;
+    background-color: $selectBackground;
+    border: 4px solid $lightBorder;
+    color: $textColor;
+    font-family: $normalFont;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 6px;
+    cursor: pointer;
+  }
 }
 
-.manaIcon {
-  background: url(../Assets/mana-icon.png);
-  width: 36px;
-  height: 34px;
-  border: 0;
-  font-size: 20px;
-  color: white;
-  text-shadow:
-    -1.5px 0px 0px black,
-    1.5px 0px 0px black,
-    0px -1.5px 0px black,
-    0px 1.5px 0px black;
+@media (min-width: $SM) {
+  .inputFilters {
+
+    select,
+    input {
+      font-size: 15px;
+    }
+  }
+
+  .subFiltersbutton {
+    button {
+      font-size: 15px;
+    }
+  }
 }
 
-select:hover,
-.manaIcon:hover {
-  cursor: pointer;
+@media (min-width: $MD) {
+  .inputFilters {
+    width: 80%;
+    gap: 15px;
+
+    select.hidden {
+      display: block;
+    }
+
+    select,
+    input {
+      font-size: 18px;
+    }
+  }
+
+  .subFiltersbutton {
+    width: 20%;
+
+    button {
+      font-size: 18px;
+    }
+  }
 }

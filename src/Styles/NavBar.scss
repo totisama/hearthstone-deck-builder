@@ -6,24 +6,81 @@
 }
 
 .navbar {
-  height: 70px;
-  background-color: $darkBrown;
-  border-radius: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 100px;
+  @include navbarStyle(0px);
 
   a {
-    color: $white;
-    font-size: 32px;
-    text-decoration: none;
-    font-family: $titleFont;
-    font-weight: bold;
+    @include anchorStyle(14px);
   }
 
   img {
-    width: 65px;
-    height: 65px;
+    @include imageStyle(40px);
+  }
+}
+
+/* Breakpoints*/
+// XS
+@media (min-width: $XS) {
+  .navbar {
+    @include navbarStyle(5px);
+
+    a {
+      @include anchorStyle(18px);
+    }
+
+    img {
+      @include imageStyle(45px);
+    }
+  }
+}
+
+// SM
+@media (min-width: $SM) {
+  .navbar {
+    @include navbarStyle(30px);
+
+    a {
+      @include anchorStyle(24px);
+    }
+
+    img {
+      @include imageStyle(55px);
+    }
+  }
+}
+
+// MD
+@media (min-width: $MD) {
+  .navbar {
+    @include navbarStyle(50px);
+
+    a {
+      @include anchorStyle(28px);
+    }
+  }
+}
+
+//LG
+@media (min-width: $LG) {
+  .navbar {
+    @include navbarStyle(80px);
+
+    a {
+      @include anchorStyle(32px);
+    }
+
+    img {
+      @include imageStyle(65px);
+    }
+  }
+}
+
+//XL
+@media (min-width: $XL) {
+  .navbar {
+    @include navbarStyle(100px);
+
+    a {
+      @include anchorStyle(32px);
+    }
   }
 }
