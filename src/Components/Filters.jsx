@@ -1,7 +1,11 @@
+import { useState } from 'react'
 import '../Styles/Filters.scss'
 import ManaFilter from './ManaFilter'
+import SubFilters from './SubFilters'
 
 const Filters = () => {
+  const [showSubFilters, setShowSubFilters] = useState(false)
+
   return (
     <section className='filters'>
       <div className='mainFilters'>
@@ -18,9 +22,14 @@ const Filters = () => {
           <input type='text' placeholder='Search' />
         </div>
         <div className='subFiltersbutton'>
-          <button>More Filters</button>
+          <button onClick={() => setShowSubFilters(!showSubFilters)}>More Filters</button>
         </div>
       </div>
+      {showSubFilters
+        ? (
+          <SubFilters />
+          )
+        : null}
     </section>
   )
 }
