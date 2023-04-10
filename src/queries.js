@@ -9,7 +9,6 @@ query Metadata {
       slug
       name
     }
-    filterableFields
     keywords {
       id
       slug
@@ -30,6 +29,7 @@ query Metadata {
       slug
       name
     }
+    types
     spellSchools
   }
 }

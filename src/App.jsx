@@ -13,7 +13,7 @@ function App () {
     : (
       <main>
         <NavBar />
-        <Filters metadata={data} />
+        <Filters metadata={data?.metadata} />
         <Routes>
           <Route path='/' element={<Cards />} />
         </Routes>

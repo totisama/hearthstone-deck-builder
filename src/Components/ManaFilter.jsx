@@ -1,5 +1,5 @@
 
-import { MANA_COSTS, MANA_COSTS_SELECT } from '../constants'
+import { MANA_COSTS, MANA_COSTS_SELECT, LARGE } from '../constants'
 import '../Styles/ManaFilter.scss'
 import { useResizeWindow } from './../hooks/useResizeWindow'
 
@@ -12,11 +12,11 @@ const ManaFilter = () => {
 
   return (
     <div className='manaFilter'>
-      {screenSize === 'LG'
+      {screenSize === LARGE
         ? (
           <div className='mana'>
             {MANA_COSTS.map((mana) => (
-              <button className='manaIcon' value={mana.value} key={mana.value} onClick={setMana}>
+              <button className='manaIcon' value={mana.slug} key={mana.slug} onClick={setMana}>
                 {mana.label}
               </button>
             ))}
@@ -25,7 +25,7 @@ const ManaFilter = () => {
         : (
           <select className='hidden'>
             {MANA_COSTS_SELECT.map((mana) => (
-              <option value={mana.value} key={mana.value}>{mana.label}</option>
+              <option value={mana.slug} key={mana.slug}>{mana.label}</option>
             ))}
           </select>
           )}

@@ -1,26 +1,31 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import '../Styles/Filters.scss'
 import ManaFilter from './ManaFilter'
 import SubFilters from './SubFilters'
 
-const Filters = ({ metadata }) => {
+const Filters = ({ metadata = {} }) => {
   const [showSubFilters, setShowSubFilters] = useState(false)
-
-  useEffect(() => {
-    console.log('Filters', metadata)
-  }, [metadata])
+  const {
+    classes = [],
+    sets = []
+  } = metadata
 
   return (
     <section className='filters'>
       <div className='mainFilters'>
         <div className='inputFilters'>
           <select className='hidden'>
-            <option value='standard-cards'>Standard Cards</option>
-            <option value='path-of-arthas'>Path of Arthas</option>
+            <option key={1} value='standard'>Standard</option>
+            <option key={2} value='wild'>Wild Cards</option>
+            {sets.map((set) => (
+              <option key={set.id} value={set.slug}>{set.name}</option>
+            ))}
           </select>
           <select className='hidden'>
-            <option value='all-classes'>All Classes</option>
-            <option value='death-knight'>Death Knight</option>
+            <option key={0} value=''>All Classes</option>
+            {classes.map((heroClass) => (
+              <option key={heroClass.id} value={heroClass.slug}>{heroClass.name}</option>
+            ))}
           </select>
           <ManaFilter />
           <input type='text' placeholder='Search' />
@@ -31,7 +36,7 @@ const Filters = ({ metadata }) => {
       </div>
       {showSubFilters
         ? (
-          <SubFilters />
+          <SubFilters metadata={metadata} />
           )
         : null}
     </section>
