@@ -1,7 +1,14 @@
+import { useEffect, useState } from 'react'
 import '../Styles/Filters.scss'
 import ManaFilter from './ManaFilter'
 
-const Filters = () => {
+const Filters = ({ metadata }) => {
+  const [showSubFilters, setShowSubFilters] = useState(false)
+
+  useEffect(() => {
+    console.log('Filters', metadata)
+  }, [metadata])
+
   return (
     <section className='filters'>
       <div className='mainFilters'>
