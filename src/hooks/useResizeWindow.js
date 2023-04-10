@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react'
-import { XL, MD } from '../constants'
+import { XL_VALUE, MD_VALUE, SMALL, MEDIUM, LARGE } from '../constants'
 
 export const useResizeWindow = () => {
   const [screenSize, setScreenSize] = useState()
 
   const updateMedia = () => {
     const windowSize = window.innerWidth
-    let size = 'LG'
+    let size = LARGE
 
-    if (windowSize < XL && windowSize > MD) {
-      size = 'MD'
-    } else if (windowSize <= MD) {
-      size = 'SM'
+    if (windowSize < XL_VALUE && windowSize > MD_VALUE) {
+      size = MEDIUM
+    } else if (windowSize <= MD_VALUE) {
+      size = SMALL
     }
 
     setScreenSize(size)
