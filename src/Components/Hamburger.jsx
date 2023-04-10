@@ -1,21 +1,37 @@
-import '../Styles/SubFilters.scss'
-import { HEALTH_VALUES, ATTACK_VALUES, LARGE, MEDIUM } from '../constants'
-import { useResizeWindow } from './../hooks/useResizeWindow'
-import Hamburger from './Hamburger'
+import '../Styles/Hamburger.scss'
+import { HEALTH_VALUES, ATTACK_VALUES } from '../constants'
+import cross from '../Assets/cross.svg'
 
-const SubFilters = ({ metadata, setShowSubFilters }) => {
-  const { screenSize } = useResizeWindow()
+const Hamburger = ({ metadata, setShowSubFilters }) => {
   const {
     types = [],
+    classes = [],
+    sets = [],
     minionTypes = [],
     spellSchools = [],
     keywords = [],
     rarities = []
   } = metadata
 
-  return screenSize === LARGE || screenSize === MEDIUM
-    ? (
-      <aside className='subFilters'>
+  return (
+    <aside className='hamburger'>
+      <div className='close'>
+        <img src={cross} onClick={() => { setShowSubFilters(false) }} />
+      </div>
+      <div className='hamburger-filters'>
+        <select>
+          <option key={1} value='standard'>Standard</option>
+          <option key={2} value='wild'>Wild Cards</option>
+          {sets.map((set) => (
+            <option key={set.id} value={set.slug}>{set.name}</option>
+          ))}
+        </select>
+        <select>
+          <option key={0} value=''>All Classes</option>
+          {classes.map((heroClass) => (
+            <option key={heroClass.id} value={heroClass.slug}>{heroClass.name}</option>
+          ))}
+        </select>
         <select>
           {HEALTH_VALUES.map((health) => (
             <option key={health.slug} value={health.slug}>{health.label}</option>
@@ -56,8 +72,9 @@ const SubFilters = ({ metadata, setShowSubFilters }) => {
             <option key={keyword.id} value={keyword.slug}>{keyword.name}</option>
           ))}
         </select>
-      </aside>)
-    : <Hamburger metadata={metadata} setShowSubFilters={setShowSubFilters} />
+      </div>
+    </aside>
+  )
 }
 
-export default SubFilters
+export default Hamburger

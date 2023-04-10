@@ -36,7 +36,7 @@ const Filters = ({ metadata = {} }) => {
       </div>
       {showSubFilters
         ? (
-          <SubFilters metadata={metadata} />
+          <SubFilters metadata={metadata} setShowSubFilters={setShowSubFilters} />
           )
         : null}
     </section>
