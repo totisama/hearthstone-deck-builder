@@ -6,6 +6,7 @@ import './Styles/Index.scss'
 import { API_HOST } from './constants'
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import { RestLink } from 'apollo-link-rest'
+import { MetadataProvider } from './Context/Metadata'
 
 const restLink = new RestLink({ uri: API_HOST })
 
@@ -17,7 +18,9 @@ const client = new ApolloClient({
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <App />
+      <MetadataProvider>
+        <App />
+      </MetadataProvider>
     </BrowserRouter>
   </ApolloProvider>
 )

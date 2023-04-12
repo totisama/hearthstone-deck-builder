@@ -2,8 +2,10 @@ import { useState } from 'react'
 import '../Styles/Filters.scss'
 import ManaFilter from './ManaFilter'
 import SubFilters from './SubFilters'
+import { useMetadata } from '../hooks/useMetadata'
 
-const Filters = ({ metadata = {} }) => {
+const Filters = () => {
+  const { metadata } = useMetadata()
   const [showSubFilters, setShowSubFilters] = useState(false)
   const {
     classes = [],
@@ -36,7 +38,7 @@ const Filters = ({ metadata = {} }) => {
       </div>
       {showSubFilters
         ? (
-          <SubFilters metadata={metadata} setShowSubFilters={setShowSubFilters} />
+          <SubFilters setShowSubFilters={setShowSubFilters} />
           )
         : null}
     </section>
