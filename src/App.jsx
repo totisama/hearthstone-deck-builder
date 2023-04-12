@@ -4,20 +4,25 @@ import Cards from './Components/Cards'
 import { Route, Routes } from 'react-router-dom'
 import { useMetadata } from './hooks/useMetadata'
 import Loading from './Components/Loading'
+import { useEffect } from 'react'
 
 function App () {
-  const { data, loading } = useMetadata()
+  const { loading, getMetadata } = useMetadata()
+
+  useEffect(() => {
+    getMetadata()
+  }, [])
 
   return loading
     ? <Loading />
     : (
-      <main>
+      <>
         <NavBar />
-        <Filters metadata={data?.metadata} />
+        <Filters />
         <Routes>
           <Route path='/' element={<Cards />} />
         </Routes>
-      </main>
+      </>
       )
 }
 

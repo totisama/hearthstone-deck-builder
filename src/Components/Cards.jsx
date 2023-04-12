@@ -16,11 +16,11 @@ const Cards = () => {
   }, [])
 
   return (
-    <section className='cards'>
+    <main className='cards'>
       {cards.map((card) => (
         <img key={card.id} className='image' src={card.image} alt={card.name} />
       ))}
-    </section>
+    </main>
   )
 }
 

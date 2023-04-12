@@ -1,8 +1,10 @@
 import '../Styles/Hamburger.scss'
 import { HEALTH_VALUES, ATTACK_VALUES } from '../constants'
 import cross from '../Assets/cross.svg'
+import { useMetadata } from '../hooks/useMetadata'
 
-const Hamburger = ({ metadata, setShowSubFilters }) => {
+const Hamburger = ({ setShowSubFilters }) => {
+  const { metadata } = useMetadata()
   const {
     types = [],
     classes = [],

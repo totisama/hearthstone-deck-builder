@@ -2,9 +2,11 @@ import '../Styles/SubFilters.scss'
 import { HEALTH_VALUES, ATTACK_VALUES, LARGE, MEDIUM } from '../constants'
 import { useResizeWindow } from './../hooks/useResizeWindow'
 import Hamburger from './Hamburger'
+import { useMetadata } from '../hooks/useMetadata'
 
-const SubFilters = ({ metadata, setShowSubFilters }) => {
+const SubFilters = ({ setShowSubFilters }) => {
   const { screenSize } = useResizeWindow()
+  const { metadata } = useMetadata()
   const {
     types = [],
     minionTypes = [],

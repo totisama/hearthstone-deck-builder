@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 
 const NavBar = () => {
   return (
-    <section className='container'>
+    <header className='container'>
       <div className='navbar'>
         <Link to='/'>Cards Library</Link>
         <img src={hearthstoneLogo} alt='Hearthstone logo' />
         <Link to='/'>Deck Builder</Link>
       </div>
-    </section>
+    </header>
   )
 }
 
