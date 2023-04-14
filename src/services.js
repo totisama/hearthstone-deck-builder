@@ -38,7 +38,7 @@ export const getCards = async (filters) => {
       queryParams.append(entry[0], entry[1])
     }
   })
-  console.log(queryParams.toString())
+  // console.log(queryParams.toString())
 
   const headers = { Authorization: `Bearer ${token}` }
   const response = await fetch(`${API_HOST}/cards?${queryParams}`, { headers })

@@ -7,7 +7,7 @@ import Loading from './Components/Loading'
 import { useEffect } from 'react'
 
 function App () {
-  const { loading, getMetadata } = useMetadata()
+  const { loading = false, getMetadata } = useMetadata()
 
   useEffect(() => {
     getMetadata()

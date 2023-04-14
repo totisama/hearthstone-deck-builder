@@ -21,11 +21,13 @@ export const useMetadata = () => {
       }
     })
 
-    if (!result.data.metadata) {
+    const metadata = result?.data?.metadata
+
+    if (!metadata) {
       throw new Error('Error getting metadata')
     }
 
-    setMetadata(result?.data?.metadata)
+    setMetadata(metadata)
   }
 
   return {
