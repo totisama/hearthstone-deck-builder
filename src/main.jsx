@@ -7,6 +7,7 @@ import { API_HOST } from './constants'
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import { RestLink } from 'apollo-link-rest'
 import { MetadataProvider } from './Context/Metadata'
+import { FiltersProvider } from './Context/Filters'
 
 const restLink = new RestLink({ uri: API_HOST })
 
@@ -19,7 +20,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}>
     <BrowserRouter>
       <MetadataProvider>
-        <App />
+        <FiltersProvider>
+          <App />
+        </FiltersProvider>
       </MetadataProvider>
     </BrowserRouter>
   </ApolloProvider>
