@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { getToken } from '../services'
 import { useLazyQuery } from '@apollo/client'
 import { GET_METADATA } from '../queries'
@@ -30,7 +30,20 @@ export const useMetadata = () => {
     setMetadata(metadata)
   }
 
+  const getClassesIdName = () => {
+    const classesObject = {}
+    metadata.classes.forEach((heroClass) => {
+      classesObject[heroClass.id] = heroClass.name
+    })
+
+    return classesObject
+  }
+
+  useEffect(() => {
+    getMetadata()
+  }, [])
+
   return {
-    metadata, loading, getMetadata
+    metadata, loading, getMetadata, getClassesIdName
   }
 }

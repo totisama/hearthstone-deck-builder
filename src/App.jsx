@@ -4,14 +4,9 @@ import Cards from './Components/Cards'
 import { Route, Routes } from 'react-router-dom'
 import { useMetadata } from './hooks/useMetadata'
 import Loading from './Components/Loading'
-import { useEffect } from 'react'
 
 function App () {
-  const { loading = false, getMetadata } = useMetadata()
-
-  useEffect(() => {
-    getMetadata()
-  }, [])
+  const { loading = false } = useMetadata()
 
   return loading
     ? <Loading />
