@@ -1,7 +1,7 @@
 @import '../Variables/Variables.scss';
 
 .hamburger {
-  width: 40%;
+  width: 58%;
   height: 100vh;
   background-color: $maroon;
   position: fixed;
@@ -9,6 +9,7 @@
   right: 0;
   z-index: 1;
   border-left: 5px solid rgb(198, 69, 57);
+  display: none;
 }
 
 .hamburger-filters {
@@ -43,4 +44,16 @@
 
 .close img:hover {
   cursor: pointer;
+}
+
+@media (min-width: $XS) {
+  .hamburger {
+    display: block;
+  }
+}
+
+@media (min-width: $MD) {
+  .hamburger {
+    display: none;
+  }
 }

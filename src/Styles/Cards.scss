@@ -1,13 +1,26 @@
+@import '../Variables/Variables.scss';
+
 .cards {
   margin-top: 50px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  padding: 0px 30px;
+  padding-left: 30px;
   margin-bottom: 50px;
+
+  img {
+    width: 150px;
+    height: 207px;
+  }
 }
 
-img {
-  width: 240px;
-  height: 330px;
+
+// SM
+@media (min-width: $SM) {
+  .cards {
+    img {
+      width: 240px;
+      height: 330px;
+    }
+  }
 }
