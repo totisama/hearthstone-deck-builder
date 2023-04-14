@@ -1,13 +1,18 @@
 
 import { MANA_COSTS, MANA_COSTS_SELECT, LARGE } from '../constants'
+import { useFilters } from '../hooks/useFilters'
 import '../Styles/ManaFilter.scss'
 import { useResizeWindow } from './../hooks/useResizeWindow'
 
 const ManaFilter = () => {
+  const { setFilters } = useFilters()
   const { screenSize } = useResizeWindow()
 
-  const setMana = (event) => {
-    console.log(event.target.value)
+  const handleManaChange = (event) => {
+    setFilters(prevState => ({
+      ...prevState,
+      manaCost: event.target.value
+    }))
   }
 
   return (
@@ -16,14 +21,14 @@ const ManaFilter = () => {
         ? (
           <div className='mana'>
             {MANA_COSTS.map((mana) => (
-              <button className='manaIcon' value={mana.slug} key={mana.slug} onClick={setMana}>
+              <button className='manaIcon' value={mana.slug} key={mana.slug} onClick={handleManaChange}>
                 {mana.label}
               </button>
             ))}
           </div>
           )
         : (
-          <select className='hidden'>
+          <select className='hidden' onChange={handleManaChange}>
             {MANA_COSTS_SELECT.map((mana) => (
               <option value={mana.slug} key={mana.slug}>{mana.label}</option>
             ))}

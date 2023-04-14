@@ -1,4 +1,4 @@
-import { API_HOST, DEFAULT_LOCALE } from './constants'
+import { API_HOST } from './constants'
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
@@ -28,11 +28,20 @@ export const getToken = async () => {
   return token.access_token
 }
 
-export const getCards = async () => {
+export const getCards = async (filters) => {
   const token = await getToken()
-  const queryParams = new URLSearchParams({ locale: DEFAULT_LOCALE })
+  const queryParams = new URLSearchParams({})
+  const entries = Object.entries(filters)
+
+  entries.forEach(entry => {
+    if (entry[1] !== '') {
+      queryParams.append(entry[0], entry[1])
+    }
+  })
+  console.log(queryParams.toString())
+
   const headers = { Authorization: `Bearer ${token}` }
-  const response = await fetch(`${API_HOST}/cards/?${queryParams}`, { headers })
+  const response = await fetch(`${API_HOST}/cards?${queryParams}`, { headers })
   const data = await response.json()
 
   // console.log('data', data)
