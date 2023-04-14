@@ -17,18 +17,20 @@ export const FiltersProvider = ({ children }) => {
     keyword: '',
     textFilter: '',
     spellSchool: '',
-    page: 1,
     pageSize: 250,
     sort: 'manaCost:asc,name:asc,classes:asc,groupByClass:asc'
   })
   const [showSubFilters, setShowSubFilters] = useState(false)
+  const [page, setPage] = useState(1)
 
   return (
     <FiltersContext.Provider value={{
       filters,
       setFilters,
       showSubFilters,
-      setShowSubFilters
+      setShowSubFilters,
+      page,
+      setPage
     }}
     >
       {children}
