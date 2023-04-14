@@ -6,8 +6,8 @@ import { useCards } from '../hooks/useCards'
 import { InView } from 'react-intersection-observer'
 
 const Cards = () => {
-  const { setPage, page, totalPageCount = 6 } = useFilters()
-  const { cards, getNextPageCards } = useCards()
+  const { setPage, page } = useFilters()
+  const { cards, getNextPageCards, totalPageCount } = useCards()
   // const { getClassesIdName } = useMetadata()
   // const [cards, setCards] = useState([])
   // const classesObject = getClassesIdName()
