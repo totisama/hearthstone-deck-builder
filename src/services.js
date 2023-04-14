@@ -28,17 +28,12 @@ export const getToken = async () => {
   return token.access_token
 }
 
-export const getCards = async (filters) => {
+export const getCards = async (queryParams, newPage = false, page = 1) => {
   const token = await getToken()
-  const queryParams = new URLSearchParams({})
-  const entries = Object.entries(filters)
 
-  entries.forEach(entry => {
-    if (entry[1] !== '') {
-      queryParams.append(entry[0], entry[1])
-    }
-  })
-  // console.log(queryParams.toString())
+  if (newPage) {
+    queryParams += '&page=' + page
+  }
 
   const headers = { Authorization: `Bearer ${token}` }
   const response = await fetch(`${API_HOST}/cards?${queryParams}`, { headers })
