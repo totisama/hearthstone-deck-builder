@@ -20,7 +20,7 @@ export const useCards = () => {
     let obtainedCards = cardsData
 
     if (orderCards) {
-      obtainedCards = getOrderedCards(obtainedCards)
+      obtainedCards = getOrderedCards(obtainedCards, true)
     }
 
     setTotalPageCount(pageCount)
@@ -48,7 +48,7 @@ export const useCards = () => {
     }))
   }
 
-  const getOrderedCards = (obtainedCards) => {
+  const getOrderedCards = (obtainedCards, filtersChanged = false) => {
     const orderedCardsObject = {}
 
     obtainedCards.forEach(card => {
@@ -61,6 +61,10 @@ export const useCards = () => {
 
       orderedCardsObject[currentClass].push(card)
     })
+
+    if (filtersChanged) {
+      return orderedCardsObject
+    }
 
     const existingCardsKeys = Object.keys(cards)
 

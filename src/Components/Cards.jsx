@@ -1,6 +1,4 @@
 import '../Styles/Cards.scss'
-// import { getCards } from '../services'
-// import { useMetadata } from '../hooks/useMetadata'
 import { useCards } from '../hooks/useCards'
 import { InView } from 'react-intersection-observer'
 
