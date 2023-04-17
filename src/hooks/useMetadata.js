@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { getToken } from '../services'
 import { useLazyQuery } from '@apollo/client'
 import { GET_METADATA } from '../queries'
@@ -38,10 +38,6 @@ export const useMetadata = () => {
 
     return classesObject
   }
-
-  useEffect(() => {
-    getMetadata()
-  }, [])
 
   return {
     metadata, loading, getMetadata, getClassesIdName
