@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { getCards } from '../services'
 
 export const useCards = () => {
-  const { filters, generateQueryParams, setPage } = useFilters()
+  const { filters, generateQueryParams, setPage, page } = useFilters()
   const [cards, setCards] = useState([])
   const [totalPageCount, setTotalPageCount] = useState(null)
 
@@ -31,12 +31,22 @@ export const useCards = () => {
     setCards(prevState => [...prevState, ...cards])
   }
 
+  const getNewCards = async (inView) => {
+    if (!inView || page >= totalPageCount) {
+      return
+    }
+    const newPage = page + 1
+
+    setPage(newPage)
+    getNextPageCards(newPage)
+  }
+
   useEffect(() => {
     setPage(1)
     retrieveCards()
   }, [filters])
 
   return {
-    cards, getNextPageCards, totalPageCount
+    cards, getNextPageCards, totalPageCount, getNewCards
   }
 }

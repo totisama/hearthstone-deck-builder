@@ -1,13 +1,11 @@
 import '../Styles/Cards.scss'
 // import { getCards } from '../services'
-import { useFilters } from '../hooks/useFilters'
 // import { useMetadata } from '../hooks/useMetadata'
 import { useCards } from '../hooks/useCards'
 import { InView } from 'react-intersection-observer'
 
 const Cards = () => {
-  const { setPage, page } = useFilters()
-  const { cards, getNextPageCards, totalPageCount } = useCards()
+  const { cards, getNewCards } = useCards()
   // const { getClassesIdName } = useMetadata()
   // const [cards, setCards] = useState([])
   // const classesObject = getClassesIdName()
@@ -20,16 +18,6 @@ const Cards = () => {
   //   }
   //   return false
   // }
-
-  const getNewCards = async (inView) => {
-    if (!inView || page >= totalPageCount) {
-      return
-    }
-    const newPage = page + 1
-
-    setPage(newPage)
-    getNextPageCards(newPage)
-  }
 
   return (
     <main>
