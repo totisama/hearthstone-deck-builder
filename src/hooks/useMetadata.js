@@ -5,7 +5,7 @@ import { GET_METADATA } from '../queries'
 import { MetadataContext } from '../Context/Metadata'
 
 export const useMetadata = () => {
-  const { metadata, setMetadata } = useContext(MetadataContext)
+  const { metadata, setMetadata, classesIdsValue, setClassesIdsValue } = useContext(MetadataContext)
   const [getResult, { loading }] = useLazyQuery(GET_METADATA)
 
   const getMetadata = async () => {
@@ -20,26 +20,27 @@ export const useMetadata = () => {
         }
       }
     })
-
     const metadata = result?.data?.metadata
 
     if (!metadata) {
       throw new Error('Error getting metadata')
     }
 
+    getClassesIdName(metadata.classes)
     setMetadata(metadata)
   }
 
-  const getClassesIdName = () => {
+  const getClassesIdName = (classes) => {
     const classesObject = {}
-    metadata.classes.forEach((heroClass) => {
+
+    classes.forEach((heroClass) => {
       classesObject[heroClass.id] = heroClass.name
     })
 
-    return classesObject
+    setClassesIdsValue(classesObject)
   }
 
   return {
-    metadata, loading, getMetadata, getClassesIdName
+    metadata, loading, getMetadata, classesIdsValue
   }
 }

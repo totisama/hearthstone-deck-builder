@@ -12,11 +12,14 @@ export const MetadataProvider = ({ children }) => {
     types: [],
     spellSchools: []
   })
+  const [classesIdsValue, setClassesIdsValue] = useState({})
 
   return (
     <MetadataContext.Provider value={{
       metadata,
-      setMetadata
+      setMetadata,
+      classesIdsValue,
+      setClassesIdsValue
     }}
     >
       {children}
