@@ -1,17 +1,18 @@
 import { useFilters } from './useFilters'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { getCards } from '../services'
 import { useMetadata } from './useMetadata'
+import { CardsContext } from '../Context/Cards'
 
-export const useCards = () => {
+export const useCards = (updateCards = true) => {
+  const { cards, setCards, cardCount, setCardCount } = useContext(CardsContext)
   const { filters, generateQueryParams, setPage, page } = useFilters()
-  const [cards, setCards] = useState({})
   const [totalPageCount, setTotalPageCount] = useState(null)
   const { classesIdsValue } = useMetadata()
 
   const retrieveCards = async (orderCards = true) => {
     const data = await getCards(generateQueryParams())
-    const { cards: cardsData, pageCount } = data
+    const { cards: cardsData, pageCount, cardCount } = data
 
     if (!cardsData) {
       throw new Error('Error getting Cards')
@@ -19,6 +20,7 @@ export const useCards = () => {
 
     let obtainedCards = cardsData
 
+    setCardCount(cardCount)
     if (orderCards) {
       obtainedCards = getOrderedCards(obtainedCards, true)
     }
@@ -29,7 +31,7 @@ export const useCards = () => {
 
   const getNextPageCards = async (page, orderCards = true) => {
     const data = await getCards(generateQueryParams(), true, page)
-    const { cards: cardsData, pageCount } = data
+    const { cards: cardsData, pageCount, cardCount } = data
 
     if (!cardsData) {
       throw new Error('Error getting Cards')
@@ -37,6 +39,7 @@ export const useCards = () => {
 
     let obtainedCards = cardsData
 
+    setCardCount(cardCount)
     if (orderCards) {
       obtainedCards = getOrderedCards(obtainedCards)
     }
@@ -50,6 +53,10 @@ export const useCards = () => {
 
   const getOrderedCards = (obtainedCards, filtersChanged = false) => {
     const orderedCardsObject = {}
+
+    if (Object.keys(classesIdsValue).length === 0) {
+      return {}
+    }
 
     obtainedCards.forEach(card => {
       const { classId } = card
@@ -68,7 +75,7 @@ export const useCards = () => {
 
     const existingCardsKeys = Object.keys(cards)
 
-    if (existingCardsKeys.length > 0) {
+    if (existingCardsKeys.length > 0 && existingCardsKeys[0]) {
       const orderedCardsKeys = Object.keys(orderedCardsObject)
 
       orderedCardsKeys.forEach(key => {
@@ -92,11 +99,13 @@ export const useCards = () => {
   }
 
   useEffect(() => {
-    setPage(1)
-    retrieveCards()
+    if (updateCards) {
+      setPage(1)
+      retrieveCards()
+    }
   }, [filters])
 
   return {
-    cards, getNextPageCards, totalPageCount, getNewCards
+    cards, getNextPageCards, totalPageCount, getNewCards, cardCount
   }
 }
