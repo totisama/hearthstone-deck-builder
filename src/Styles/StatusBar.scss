@@ -1,43 +1,47 @@
 @import '../Variables/Variables.scss';
 
-.statusBar{
+.statusBar {
   padding: 20px;
   display: flex;
   align-items: center;
-  gap: 24px
+  gap: 24px;
 
   h1 {
-    font-size: 20px;
+    font-size: 16px;
     font-family: $normalFont;
     color: $darkBrown;
   }
 }
 
-.removableFilters{
+.removableFilters {
   display: flex;
   flex-wrap: wrap;
-  height: 20px;
+  gap: 5px;
 
-  button{
-    width: auto;
-    // height: 30px;
+  button {
     border-radius: 50px;
-    padding-left: 5px;
     background-color: rgb(97, 67, 38);
     border: 0px;
     color: $white;
     font-family: $normalFont;
-    font-weight: bold;
-    font-size: 18px;
-    padding: 5px;
+    font-size: 16px;
+    padding: 2px 10px;
+    display: flex;
+    align-items: center;
   }
 
   span {
-    background: none;
-    display: inline;
-    margin: 0px 0px 0px 10px;
+    margin-left: 10px;
     padding: 0px;
     color: rgb(252, 209, 68);
     font-size: 15px;
+  }
+
+  img {
+    margin-right: 5px;
+  }
+
+  button:hover {
+    background-color: rgb(38, 56, 97);
   }
 }

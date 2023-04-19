@@ -38,13 +38,17 @@ export const useFilters = () => {
   }
 
   const removeFilter = (filterKey) => {
-    const newFiltervalue = {}
-    newFiltervalue[filterKey] = ''
+    const newFilter = {}
+    newFilter[filterKey] = ''
 
     setFilters(prevState => ({
       ...prevState,
-      ...newFiltervalue
+      ...newFilter
     }))
+  }
+
+  const removeAllFilters = () => {
+    console.log('reset')
   }
 
   return {
@@ -56,6 +60,7 @@ export const useFilters = () => {
     page,
     setPage,
     getStatusFilters,
-    removeFilter
+    removeFilter,
+    removeAllFilters
   }
 }
