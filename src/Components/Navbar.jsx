@@ -8,7 +8,7 @@ const NavBar = () => {
       <div className='navbar'>
         <Link to='/'>Cards Library</Link>
         <img src={hearthstoneLogo} alt='Hearthstone logo' />
-        <Link to='/'>Deck Builder</Link>
+        <Link to='/hero'>Deck Builder</Link>
       </div>
     </header>
   )
