@@ -1,15 +1,17 @@
-const Loading = () => {
+import '../Styles/Loader.scss'
+
+const Loader = () => {
   return (
     <div style={{
       display: 'flex',
-      flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       height: '100vh'
     }}
-    >Loading data
+    ><span class='loader' />
     </div>
+
   )
 }
 
-export default Loading
+export default Loader

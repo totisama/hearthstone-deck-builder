@@ -4,7 +4,7 @@ import Cards from './Components/Cards'
 import StatusBar from './Components/StatusBar'
 import { Route, Routes } from 'react-router-dom'
 import { useMetadata } from './hooks/useMetadata'
-import Loading from './Components/Loading'
+import Loader from './Components/Loader'
 import { useEffect } from 'react'
 
 function App () {
@@ -15,7 +15,7 @@ function App () {
   }, [])
 
   return loading
-    ? <Loading />
+    ? <Loader />
     : (
       <>
         <NavBar />
