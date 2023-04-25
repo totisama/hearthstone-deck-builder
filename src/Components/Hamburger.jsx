@@ -1,6 +1,6 @@
 import '../Styles/Hamburger.scss'
 import { HEALTH_VALUES, ATTACK_VALUES } from '../constants'
-import cross from '../Assets/cross.svg'
+import cross from '../assets/cross.svg'
 import { useMetadata } from '../hooks/useMetadata'
 import { useFilters } from '../hooks/useFilters'
 

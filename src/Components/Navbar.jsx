@@ -1,5 +1,5 @@
 import '../Styles/NavBar.scss'
-import hearthstoneLogo from '../Assets/hearthstone.webp'
+import hearthstoneLogo from '../assets/hearthstone.webp'
 import { Link } from 'react-router-dom'
 
 const NavBar = () => {
