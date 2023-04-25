@@ -1,6 +1,7 @@
 import '../Styles/Cards.scss'
 import { useCards } from '../hooks/useCards'
 import { InView } from 'react-intersection-observer'
+import NoCards from './NoCards'
 
 const Cards = () => {
   const { cards, getNewCards } = useCards()
@@ -23,7 +24,7 @@ const Cards = () => {
             ))}
             <InView as='div' onChange={(inView) => { getNewCards(inView) }} />
           </>)
-        : null}
+        : <NoCards />}
     </main>
   )
 }

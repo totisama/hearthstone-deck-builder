@@ -2,15 +2,9 @@ import '../Styles/Loader.scss'
 
 const Loader = () => {
   return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: '100vh'
-    }}
-    ><span class='loader' />
+    <div className='loader-container'>
+      <span className='loader' />
     </div>
-
   )
 }
 
