@@ -33,7 +33,7 @@ To get started, you will first need to follow the [getting started guide](https:
 
 ### Try it here:
 
-https://hearthstone-deck-builder-8rh6mmk8o-totisama.vercel.app/
+https://hearthstone-deck-builder-gilt.vercel.app
 
 ### Repository:
 
