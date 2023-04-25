@@ -1,7 +1,7 @@
 @import '../Variables/Variables.scss';
 
 .container {
-  width: 80%;
+  width: 85%;
   margin: 15px auto 20px auto;
 }
 
@@ -21,10 +21,10 @@
 // XS
 @media (min-width: $XS) {
   .navbar {
-    @include navbarStyle(5px);
+    @include navbarStyle(10px);
 
     a {
-      @include anchorStyle(18px);
+      @include anchorStyle(20px);
     }
 
     img {

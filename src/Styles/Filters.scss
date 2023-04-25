@@ -112,6 +112,14 @@
     width: 15%;
 
     button {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (min-width: $LG) {
+  .subFiltersbutton {
+    button {
       font-size: 18px;
     }
   }
