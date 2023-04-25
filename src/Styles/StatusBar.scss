@@ -5,18 +5,19 @@
   display: flex;
   align-items: center;
   gap: 24px;
-
-  h1 {
-    font-size: 16px;
-    font-family: $normalFont;
-    color: $darkBrown;
-  }
 }
 
 .removableFilters {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 10px;
+
+  h1 {
+    font-size: 18px;
+    font-family: $normalFont;
+    color: $darkBrown;
+    margin: 0px;
+  }
 
   button {
     border-radius: 50px;
@@ -28,6 +29,9 @@
     padding: 2px 10px;
     display: flex;
     align-items: center;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
   }
 
   span {
