@@ -55,7 +55,7 @@ const Filters = () => {
             ))}
           </select>
           <ManaFilter />
-          <input type='text' placeholder='Search' onChange={(event) => setSearch(event.target.value)} />
+          <input type='text' value={filters.textFilter} placeholder='Search' onChange={(event) => setSearch(event.target.value)} />
         </div>
         <div className='subFiltersbutton'>
           <button onClick={() => setShowSubFilters(!showSubFilters)}>More Filters</button>

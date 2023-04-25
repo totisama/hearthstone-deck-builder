@@ -5,7 +5,7 @@ import '../Styles/ManaFilter.scss'
 import { useResizeWindow } from './../hooks/useResizeWindow'
 
 const ManaFilter = () => {
-  const { setFilters } = useFilters()
+  const { setFilters, filters } = useFilters()
   const { screenSize } = useResizeWindow()
 
   const handleManaChange = (event) => {
@@ -28,7 +28,7 @@ const ManaFilter = () => {
           </div>
           )
         : (
-          <select className='hidden' onChange={handleManaChange}>
+          <select className='hidden' value={filters.manaCost} onChange={handleManaChange}>
             {MANA_COSTS_SELECT.map((mana) => (
               <option value={mana.slug} key={mana.slug}>{mana.label}</option>
             ))}
