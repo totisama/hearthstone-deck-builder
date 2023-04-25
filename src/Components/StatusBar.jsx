@@ -1,7 +1,7 @@
 import '../Styles/StatusBar.scss'
 import { useFilters } from '../hooks/useFilters'
 import { useStatusBar } from '../hooks/useStatusBar'
-import clearIcon from '../Assets/clear-icon.svg'
+import clearIcon from '../assets/clear-icon.svg'
 import { NUMBER_FILTERS_KEY } from '../constants'
 
 const StatusBar = () => {

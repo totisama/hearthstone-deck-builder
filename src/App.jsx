@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import { useMetadata } from './hooks/useMetadata'
 import Loader from './Components/Loader'
 import { useEffect } from 'react'
+import InProgress from './Components/InProgress'
 
 function App () {
   const { getMetadata, loading = false } = useMetadata()
@@ -23,6 +24,7 @@ function App () {
         <StatusBar />
         <Routes>
           <Route path='/' element={<Cards />} />
+          <Route path='/hero' element={<InProgress />} />
         </Routes>
       </>
       )
