@@ -1,5 +1,5 @@
 
-import { MANA_COSTS, MANA_COSTS_SELECT, LARGE } from '../constants'
+import { MANA_COSTS, MANA_COSTS_SELECT, WINDOW_SIZES } from '../constants'
 import { useFilters } from '../hooks/useFilters'
 import '../Styles/ManaFilter.scss'
 import { useResizeWindow } from './../hooks/useResizeWindow'
@@ -17,7 +17,7 @@ const ManaFilter = () => {
 
   return (
     <div className='manaFilter'>
-      {screenSize === LARGE
+      {screenSize === WINDOW_SIZES.LARGE
         ? (
           <div className='mana'>
             {MANA_COSTS.map((mana) => (

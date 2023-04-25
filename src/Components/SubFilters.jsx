@@ -1,5 +1,5 @@
 import '../Styles/SubFilters.scss'
-import { HEALTH_VALUES, ATTACK_VALUES, LARGE, MEDIUM } from '../constants'
+import { HEALTH_VALUES, ATTACK_VALUES, WINDOW_SIZES } from '../constants'
 import { useResizeWindow } from './../hooks/useResizeWindow'
 import Hamburger from './Hamburger'
 import { useMetadata } from '../hooks/useMetadata'
@@ -26,7 +26,7 @@ const SubFilters = () => {
     })
   }
 
-  return screenSize === LARGE || screenSize === MEDIUM
+  return screenSize === WINDOW_SIZES.LARGE || screenSize === WINDOW_SIZES.MEDIUM
     ? (
       <aside className='subFilters'>
         <select value={filters.attack} onChange={(event) => handleOnChange(event, 'attack')}>

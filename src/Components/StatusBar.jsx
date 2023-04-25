@@ -2,6 +2,7 @@ import '../Styles/StatusBar.scss'
 import { useFilters } from '../hooks/useFilters'
 import { useStatusBar } from '../hooks/useStatusBar'
 import clearIcon from '../Assets/clear-icon.svg'
+import { NUMBER_FILTERS_KEY } from '../constants'
 
 const StatusBar = () => {
   const { removeFilter, removeAllFilters } = useFilters()
@@ -19,7 +20,9 @@ const StatusBar = () => {
         <h1>{cardCount} cards found for "{set}"</h1>
         {statusFiltersEntries.map(([key, value]) => (
           <button key={value} onClick={() => { removeFilter(key) }}>
-            {value}
+            {NUMBER_FILTERS_KEY[key]
+              ? NUMBER_FILTERS_KEY[key] + ': ' + value
+              : value}
             <span>✕</span>
           </button>
         ))}
