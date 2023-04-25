@@ -60,14 +60,24 @@ export const API_HOST = 'https://us.api.blizzard.com/hearthstone'
 
 export const DEFAULT_LOCALE = 'en_US'
 
-export const XS_VALUE = 256
-export const SM_VALUE = 512
-export const MD_VALUE = 768
-export const LG_VALUE = 1024
-export const XL_VALUE = 1280
+export const WINDOW_SIZES_VALUE = {
+  XS_VALUE: 256,
+  SM_VALUE: 512,
+  MD_VALUE: 768,
+  LG_VALUE: 1024,
+  XL_VALUE: 1280
+}
 
-export const EXTRA_SMALL = 'XS'
-export const SMALL = 'SM'
-export const MEDIUM = 'MD'
-export const LARGE = 'LG'
-export const EXTRA_LARGE = 'XL'
+export const WINDOW_SIZES = {
+  EXTRA_SMALL: 'XS',
+  SMALL: 'SM',
+  MEDIUM: 'MD',
+  LARGE: 'LG',
+  EXTRA_LARGE: 'XL'
+}
+
+export const NUMBER_FILTERS_KEY = {
+  manaCost: 'Mana',
+  attack: 'Attack',
+  health: 'Health'
+}

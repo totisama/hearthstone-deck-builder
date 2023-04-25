@@ -24,6 +24,33 @@ export const useFilters = () => {
     return queryParams.toString()
   }
 
+  const getStatusFilters = () => {
+    const notShownFilters = ['locale', 'set', 'pageSize', 'sort']
+    const statusFilters = {}
+
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== '' && !notShownFilters.includes(key)) {
+        statusFilters[key] = value
+      }
+    })
+
+    return statusFilters
+  }
+
+  const removeFilter = (filterKey) => {
+    const newFilter = {}
+    newFilter[filterKey] = ''
+
+    setFilters(prevState => ({
+      ...prevState,
+      ...newFilter
+    }))
+  }
+
+  const removeAllFilters = () => {
+    console.log('reset')
+  }
+
   return {
     filters,
     setFilters,
@@ -31,6 +58,9 @@ export const useFilters = () => {
     setShowSubFilters,
     generateQueryParams,
     page,
-    setPage
+    setPage,
+    getStatusFilters,
+    removeFilter,
+    removeAllFilters
   }
 }

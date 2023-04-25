@@ -1,6 +1,7 @@
 import NavBar from './Components/Navbar'
 import Filters from './Components/Filters'
 import Cards from './Components/Cards'
+import StatusBar from './Components/StatusBar'
 import { Route, Routes } from 'react-router-dom'
 import { useMetadata } from './hooks/useMetadata'
 import Loading from './Components/Loading'
@@ -19,6 +20,7 @@ function App () {
       <>
         <NavBar />
         <Filters />
+        <StatusBar />
         <Routes>
           <Route path='/' element={<Cards />} />
         </Routes>

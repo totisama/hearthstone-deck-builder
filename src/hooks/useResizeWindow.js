@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
-import { XL_VALUE, MD_VALUE, SMALL, MEDIUM, LARGE } from '../constants'
+import { WINDOW_SIZES_VALUE, WINDOW_SIZES } from '../constants'
 
 export const useResizeWindow = () => {
   const [screenSize, setScreenSize] = useState()
+  const { XL_VALUE, MD_VALUE } = WINDOW_SIZES_VALUE
+  const { SMALL, MEDIUM, LARGE } = WINDOW_SIZES
 
   const updateMedia = () => {
     const windowSize = window.innerWidth
