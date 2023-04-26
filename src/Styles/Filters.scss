@@ -58,7 +58,7 @@
   }
 }
 
-.subFiltersbutton {
+.subFiltersButton {
   width: 35%;
   display: flex;
   justify-content: flex-end;
@@ -86,7 +86,7 @@
     }
   }
 
-  .subFiltersbutton {
+  .subFiltersButton {
     button {
       font-size: 15px;
     }
@@ -108,7 +108,7 @@
     }
   }
 
-  .subFiltersbutton {
+  .subFiltersButton {
     width: 15%;
 
     button {
@@ -118,7 +118,7 @@
 }
 
 @media (min-width: $LG) {
-  .subFiltersbutton {
+  .subFiltersButton {
     button {
       font-size: 18px;
     }
