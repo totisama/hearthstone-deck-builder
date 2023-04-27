@@ -5,6 +5,7 @@ import { useMetadata } from './hooks/useMetadata'
 import Loader from './Components/Loader'
 import { useEffect } from 'react'
 import InProgress from './Components/InProgress'
+import HeroSelect from './Components/HeroSelect'
 
 function App () {
   const { getMetadata, loading = false } = useMetadata()
@@ -20,7 +21,8 @@ function App () {
         <NavBar />
         <Routes>
           <Route path='/' element={<Cards />} />
-          <Route path='/hero' element={<InProgress />} />
+          <Route path='/deckbuilder' element={<HeroSelect />} />
+          <Route path='/deckbuilder/:id' element={<InProgress />} />
         </Routes>
       </>
       )
