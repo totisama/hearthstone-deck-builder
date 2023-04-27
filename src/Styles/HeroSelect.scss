@@ -1,0 +1,83 @@
+@import '../Variables/Variables.scss';
+
+.heroSelectionContainer {
+  width: 100%;
+  background: url(../assets/bg_class_selector.jpg) left top repeat;
+  margin-bottom: 50px;
+}
+
+.heroSelection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  min-height: 800px;
+  border-style: solid;
+  border-width: 140px 0px;
+  border-image: url(../assets/frame_class_selector.png) 130 round;
+  gap: 20px;
+  padding-top: 50px;
+}
+
+.heroButton {
+  position: relative;
+  width: 190px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+  background-size: cover;
+  max-width: 190px;
+
+  img {
+    width: 190px;
+    height: 140px;
+  }
+
+  .heroName {
+    position: absolute;
+    bottom: 30%;
+    left: 33%;
+    width: 55%;
+    height: 15%;
+
+    h4 {
+      color: $yellow;
+      text-decoration: none;
+      text-align: left;
+    }
+  }
+}
+
+@media (min-width: $SM) {
+  .heroSelection {
+    border-width: 140px 50px;
+    gap: 50px
+  }
+}
+
+@media (min-width: $MD) {
+  .heroSelection {
+    border-width: 140px 120px;
+    gap: 30px
+  }
+
+  .heroButton {
+    width: 254px;
+    max-width: 254px;
+
+    img {
+      width: 240px;
+      height: 198px;
+    }
+
+    .heroName {
+      position: absolute;
+      bottom: 25%;
+      left: 35%;
+      width: 45%;
+      height: 15%;
+    }
+  }
+}
