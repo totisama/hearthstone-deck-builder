@@ -95,3 +95,17 @@ export const HERO_CLASSES = [
   { id: 9, image: 'warlock.png', name: 'Warlock', value: 'warlock' },
   { id: 10, image: 'warrior.png', name: 'Warrior', value: 'warrior' }
 ]
+
+export const HEROS_LIST = [
+  'deathknight',
+  'demonhunter',
+  'druid',
+  'hunter',
+  'mage',
+  'paladin',
+  'priest',
+  'rogue',
+  'shaman',
+  'warlock',
+  'warrior'
+]
