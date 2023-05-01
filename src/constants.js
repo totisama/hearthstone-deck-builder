@@ -109,3 +109,17 @@ export const HEROS_LIST = [
   'warlock',
   'warrior'
 ]
+
+export const HEROS_NAME = {
+  deathknight: 'Death Knight',
+  demonhunter: 'Demon Hunter',
+  druid: 'Druid',
+  hunter: 'Hunter',
+  mage: 'Mage',
+  paladin: 'Paladin',
+  priest: 'Priest',
+  rogue: 'Rogue',
+  shaman: 'Shaman',
+  warlock: 'Warlock',
+  warrior: 'Warrior'
+}
