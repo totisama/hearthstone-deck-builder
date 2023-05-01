@@ -1,0 +1,87 @@
+@import '../Variables/Variables.scss';
+
+.deckBuilderContainer {
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.heroCardsContainer {
+  width: 75%;
+}
+
+.deckContainer {
+  width: 25%;
+  position: fixed;
+  top: 225px;
+  right: 30px;
+  z-index: -1;
+}
+
+.topContainer {
+  display: block;
+  position: relative;
+  height: 0px;
+  background: url(../assets/deckListTop.png) center top / cover no-repeat;
+  padding-bottom: 35%;
+}
+
+.top {
+  position: absolute;
+  transform: translateY(9%);
+  left: 4.4%;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 91%;
+  height: 80%;
+  padding-top: 3px;
+}
+
+.topBorder {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url(../assets/heroFrame.png);
+}
+
+.heroBackground {
+  width: 300px;
+  height: 74px;
+}
+
+.titleContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 2;
+  left: 10%;
+  gap: 5px;
+}
+
+.heroTitle {
+  margin: 0px;
+  color: $white;
+}
+
+.cardsCount {
+  margin: 0px;
+  color: $yellow;
+}
+
+.deck {
+  height: 350px;
+  background: url(../assets/deckListMiddle.png) center center / 100% repeat-y;
+  z-index: 20;
+}
+
+.deckBottom {
+  height: 75px;
+  background: url(../assets/deckListBottom.png) center bottom / 100% 110px no-repeat;
+  padding: 35px 30px 0px;
+}
