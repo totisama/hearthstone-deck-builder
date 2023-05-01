@@ -31,7 +31,7 @@ const Hamburger = () => {
       <div className='close'>
         <img src={cross} onClick={() => { setShowSubFilters(false) }} />
       </div>
-      <div className='hamburger-filters'>
+      <div className='hamburgerFilters'>
         <select value={filters.set} onChange={(event) => handleOnChange(event, 'set')}>
           <option key={1} value='standard'>Standard</option>
           <option key={2} value='wild'>Wild Cards</option>

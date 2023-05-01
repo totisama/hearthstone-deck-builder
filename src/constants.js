@@ -81,3 +81,17 @@ export const NUMBER_FILTERS_KEY = {
   attack: 'Attack',
   health: 'Health'
 }
+
+export const HERO_CLASSES = [
+  { id: 0, image: 'deathknight.png', name: 'Death Knight', value: 'deathknight' },
+  { id: 1, image: 'demonhunter.png', name: 'Demon Hunter', value: 'demonhunter' },
+  { id: 2, image: 'druid.png', name: 'Druid', value: 'druid' },
+  { id: 3, image: 'hunter.png', name: 'Hunter', value: 'hunter' },
+  { id: 4, image: 'mage.png', name: 'Mage', value: 'mage' },
+  { id: 5, image: 'paladin.png', name: 'Paladin', value: 'paladin' },
+  { id: 6, image: 'priest.png', name: 'Priest', value: 'priest' },
+  { id: 7, image: 'rogue.png', name: 'Rogue', value: 'rogue' },
+  { id: 8, image: 'shaman.png', name: 'Shaman', value: 'shaman' },
+  { id: 9, image: 'warlock.png', name: 'Warlock', value: 'warlock' },
+  { id: 10, image: 'warrior.png', name: 'Warrior', value: 'warrior' }
+]
