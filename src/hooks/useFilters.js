@@ -8,7 +8,8 @@ export const useFilters = () => {
     showSubFilters,
     setShowSubFilters,
     page,
-    setPage
+    setPage,
+    removeAllFilters
   } = useContext(FiltersContext)
 
   const generateQueryParams = () => {
@@ -45,10 +46,6 @@ export const useFilters = () => {
       ...prevState,
       ...newFilter
     }))
-  }
-
-  const removeAllFilters = () => {
-    console.log('reset')
   }
 
   return {
