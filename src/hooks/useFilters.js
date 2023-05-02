@@ -38,6 +38,16 @@ export const useFilters = () => {
     return statusFilters
   }
 
+  const setFilter = (key, value) => {
+    const newFilter = {}
+    newFilter[key] = value
+
+    setFilters(prevState => ({
+      ...prevState,
+      ...newFilter
+    }))
+  }
+
   const removeFilter = (filterKey) => {
     const newFilter = {}
     newFilter[filterKey] = ''
@@ -50,7 +60,7 @@ export const useFilters = () => {
 
   return {
     filters,
-    setFilters,
+    setFilter,
     showSubFilters,
     setShowSubFilters,
     generateQueryParams,
