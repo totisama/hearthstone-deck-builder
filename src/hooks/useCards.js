@@ -98,6 +98,11 @@ export const useCards = (updateCards = true) => {
     setPage(newPage)
   }
 
+  const resetCards = () => {
+    setCards({})
+    setPage(1)
+  }
+
   useEffect(() => {
     if (updateCards) {
       setPage(1)
@@ -106,6 +111,6 @@ export const useCards = (updateCards = true) => {
   }, [filters])
 
   return {
-    cards, getNextPageCards, totalPageCount, getNewCards, cardCount
+    cards, getNextPageCards, totalPageCount, getNewCards, cardCount, resetCards
   }
 }

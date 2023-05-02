@@ -1,13 +1,21 @@
 import '../Styles/Cards.scss'
+import { useEffect } from 'react'
 import { useCards } from '../hooks/useCards'
+import { useFilters } from '../hooks/useFilters'
 import { InView } from 'react-intersection-observer'
 import NoCards from './NoCards'
 import Filters from './Filters'
 import StatusBar from './StatusBar'
 
 const Cards = () => {
-  const { cards, getNewCards } = useCards()
+  const { removeAllFilters } = useFilters()
+  const { cards, getNewCards, resetCards } = useCards()
   const cardsEntries = Object.entries(cards)
+
+  useEffect(() => {
+    resetCards()
+    removeAllFilters()
+  }, [])
 
   return (
     <>

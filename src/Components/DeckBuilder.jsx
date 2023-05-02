@@ -6,12 +6,14 @@ import NoCards from './NoCards'
 import Filters from './Filters'
 import StatusBar from './StatusBar'
 import { useCards } from '../hooks/useCards'
+import { useFilters } from '../hooks/useFilters'
 import { InView } from 'react-intersection-observer'
 import Loader from './Loader'
 
 const DeckBuilder = () => {
   const { hero } = useParams()
   const navigate = useNavigate()
+  const { setFilter } = useFilters()
   const { cards, getNewCards } = useCards()
   const cardsEntries = Object.entries(cards)
   const [deck, setDeck] = useState([])
@@ -43,6 +45,9 @@ const DeckBuilder = () => {
       return
     }
 
+    const classFilter = hero + ',neutral'
+    setFilter('class', classFilter)
+
     setLoading(false)
   }, [])
 
@@ -52,7 +57,7 @@ const DeckBuilder = () => {
         <Filters deckBuilder />
         <main className='deckBuilderContainer'>
           <div className='heroCardsContainer'>
-            <StatusBar />
+            <StatusBar deckBuilder />
             {cardsEntries.length > 0
               ? (
                 <>

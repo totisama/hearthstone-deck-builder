@@ -26,8 +26,10 @@
   justify-content: center;
   align-items: flex-start;
   text-align: center;
-  background-size: cover;
+  background: none;
+  border: none;
   max-width: 190px;
+  cursor: pointer;
 
   img {
     width: 190px;
@@ -36,8 +38,8 @@
 
   .heroName {
     position: absolute;
-    bottom: 30%;
-    left: 33%;
+    bottom: 28%;
+    left: 34%;
     width: 55%;
     height: 15%;
 
@@ -45,6 +47,7 @@
       color: $yellow;
       text-decoration: none;
       text-align: left;
+      font-size: 13px;
     }
   }
 }
@@ -72,11 +75,12 @@
     }
 
     .heroName {
-      position: absolute;
-      bottom: 25%;
-      left: 35%;
-      width: 45%;
-      height: 15%;
+      bottom: 27%;
+      width: 50%;
+
+      h4 {
+        font-size: 18px;
+      }
     }
   }
 }

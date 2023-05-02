@@ -45,7 +45,7 @@ export const FiltersProvider = ({ children }) => {
     }))
   }
 
-  const removeAllFilters = (deckbuilder) => {
+  const removeAllFilters = (deckbuilder = false) => {
     if (!deckbuilder) {
       setFilters(initialFilters)
 
