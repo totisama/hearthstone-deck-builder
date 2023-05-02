@@ -55,7 +55,7 @@ const Filters = ({ deckBuilder = false }) => {
               )
             : null}
           <ManaFilter />
-          <input type='text' value={filters.textFilter} placeholder='Search' onChange={(event) => setSearch(event.target.value)} />
+          <input type='text' defaultValue={filters.textFilter} placeholder='Search' onChange={(event) => setSearch(event.target.value)} />
         </div>
         <div className='subFiltersButton'>
           <button onClick={() => setShowSubFilters(!showSubFilters)}>More Filters</button>
