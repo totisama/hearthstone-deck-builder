@@ -4,7 +4,7 @@ import { useStatusBar } from '../hooks/useStatusBar'
 import clearIcon from '../assets/clear-icon.svg'
 import { NUMBER_FILTERS_KEY } from '../constants'
 
-const StatusBar = () => {
+const StatusBar = ({ deckBuilder = false }) => {
   const { removeFilter, removeAllFilters } = useFilters()
   const { status } = useStatusBar()
   const {
@@ -28,7 +28,7 @@ const StatusBar = () => {
         ))}
         {statusFiltersEntries.length > 1
           ? (
-            <button onClick={() => { removeAllFilters() }}>
+            <button onClick={() => { removeAllFilters(deckBuilder) }}>
               <img src={clearIcon} />
               Clear All
             </button>)

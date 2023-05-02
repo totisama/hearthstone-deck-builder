@@ -25,18 +25,49 @@ export const FiltersProvider = ({ children }) => {
   const [showSubFilters, setShowSubFilters] = useState(false)
   const [page, setPage] = useState(1)
 
-  const removeAllFilters = () => {
+  const setFilter = (key, value) => {
+    const newFilter = {}
+    newFilter[key] = value
+
+    setFilters(prevState => ({
+      ...prevState,
+      ...newFilter
+    }))
+  }
+
+  const removeFilter = (filterKey) => {
+    const newFilter = {}
+    newFilter[filterKey] = ''
+
+    setFilters(prevState => ({
+      ...prevState,
+      ...newFilter
+    }))
+  }
+
+  const removeAllFilters = (deckbuilder) => {
+    if (!deckbuilder) {
+      setFilters(initialFilters)
+
+      return
+    }
+
+    const deckbuilderFilters = initialFilters
+
+    deckbuilderFilters.class = filters.class
+
     setFilters(initialFilters)
   }
 
   return (
     <FiltersContext.Provider value={{
       filters,
-      setFilters,
+      setFilter,
       showSubFilters,
       setShowSubFilters,
       page,
       setPage,
+      removeFilter,
       removeAllFilters
     }}
     >

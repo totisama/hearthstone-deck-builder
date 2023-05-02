@@ -4,11 +4,12 @@ import { FiltersContext } from '../Context/Filters'
 export const useFilters = () => {
   const {
     filters,
-    setFilters,
+    setFilter,
     showSubFilters,
     setShowSubFilters,
     page,
     setPage,
+    removeFilter,
     removeAllFilters
   } = useContext(FiltersContext)
 
@@ -36,26 +37,6 @@ export const useFilters = () => {
     })
 
     return statusFilters
-  }
-
-  const setFilter = (key, value) => {
-    const newFilter = {}
-    newFilter[key] = value
-
-    setFilters(prevState => ({
-      ...prevState,
-      ...newFilter
-    }))
-  }
-
-  const removeFilter = (filterKey) => {
-    const newFilter = {}
-    newFilter[filterKey] = ''
-
-    setFilters(prevState => ({
-      ...prevState,
-      ...newFilter
-    }))
   }
 
   return {
