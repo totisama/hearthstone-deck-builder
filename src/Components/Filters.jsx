@@ -7,7 +7,7 @@ import { useFilters } from '../hooks/useFilters'
 import { useDebounce } from '../hooks/useDebounce'
 
 const Filters = ({ deckBuilder = false }) => {
-  const { setFilters, showSubFilters, setShowSubFilters, filters } = useFilters()
+  const { setFilter, showSubFilters, setShowSubFilters, filters } = useFilters()
   const { metadata } = useMetadata()
   const [search, setSearch] = useState('')
   const debouncedFromTextFilter = useDebounce(search, 500)
@@ -16,25 +16,12 @@ const Filters = ({ deckBuilder = false }) => {
     sets = []
   } = metadata
 
-  const handleOnChangeSet = (event) => {
-    setFilters(prevState => ({
-      ...prevState,
-      set: event.target.value
-    }))
-  }
-
-  const handleOnChangeClass = (event) => {
-    setFilters(prevState => ({
-      ...prevState,
-      class: event.target.value
-    }))
+  const handleOnChange = (event, key) => {
+    setFilter(key, event.target.value)
   }
 
   useEffect(() => {
-    setFilters(prevState => ({
-      ...prevState,
-      textFilter: debouncedFromTextFilter
-    }))
+    setFilter('textFilter', debouncedFromTextFilter)
   }, [debouncedFromTextFilter])
 
   return (
@@ -48,7 +35,7 @@ const Filters = ({ deckBuilder = false }) => {
             : null} */}
           {!deckBuilder
             ? (
-              <select className='hidden' value={filters.set} onChange={handleOnChangeSet}>
+              <select className='hidden' value={filters.set} onChange={(e) => handleOnChange(e, 'set')}>
                 <option key={1} value='standard'>Standard</option>
                 <option key={2} value='wild'>Wild Cards</option>
                 {sets.map((set) => (
@@ -59,7 +46,7 @@ const Filters = ({ deckBuilder = false }) => {
             : null}
           {!deckBuilder
             ? (
-              <select className='hidden' value={filters.class} onChange={handleOnChangeClass}>
+              <select className='hidden' value={filters.class} onChange={(e) => handleOnChange(e, 'class')}>
                 <option key={0} value=''>All Classes</option>
                 {classes.map((heroClass) => (
                   <option key={heroClass.id} value={heroClass.slug}>{heroClass.name}</option>

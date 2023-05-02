@@ -5,7 +5,7 @@ import { useMetadata } from '../hooks/useMetadata'
 import { useFilters } from '../hooks/useFilters'
 
 const Hamburger = () => {
-  const { setFilters, setShowSubFilters, filters } = useFilters()
+  const { setFilter, setShowSubFilters, filters } = useFilters()
   const { metadata } = useMetadata()
   const {
     types = [],
@@ -18,12 +18,7 @@ const Hamburger = () => {
   } = metadata
 
   const handleOnChange = (event, filter) => {
-    setFilters((prevState) => {
-      const newState = { ...prevState }
-      newState[filter] = event.target.value
-
-      return newState
-    })
+    setFilter(filter, event.target.value)
   }
 
   return (
