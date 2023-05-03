@@ -30,13 +30,12 @@ const DeckBuilder = () => {
       setDeckSize(40)
     }
 
-    if (deck.length >= localDeckSize) {
+    if (getDeckLength() >= localDeckSize) {
       return
     }
 
     const cardId = card.id
     const cardExists = addedCardsAmount[cardId]
-    console.log('addedCardsAmount', addedCardsAmount)
 
     // rarityId = 5 (Legendary card)
     // Dont add the card if is already on the deck and has 2 copies of it
@@ -72,6 +71,16 @@ const DeckBuilder = () => {
     return deckLength
   }
 
+  const getCardAmountClasses = (cardId, cardRarity) => {
+    let classes = 'cardAmount'
+
+    if (addedCardsAmount[cardId] >= 2 || cardRarity === 5) {
+      classes += ' locked'
+    }
+
+    return classes
+  }
+
   useEffect(() => {
     if (!HEROS_LIST.includes(hero)) {
       navigate('/deckbuilder')
@@ -102,6 +111,15 @@ const DeckBuilder = () => {
                         {cards.map((card) => (
                           <div key={card.id} className='cardContainer' onClick={() => addCard(card)}>
                             <img src={card.image} alt={card.name} />
+                            {addedCardsAmount[card.id]
+                              ? (
+                                <div className={getCardAmountClasses(card.id, card.rarityId)}>
+                                  <span className='cardAmountText'>
+                                    {addedCardsAmount[card.id]}/{card.rarityId === 5 ? 1 : 2}
+                                  </span>
+                                </div>
+                                )
+                              : null}
                           </div>
                         ))}
                       </div>
