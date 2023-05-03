@@ -17,25 +17,59 @@ const DeckBuilder = () => {
   const { cards, getNewCards } = useCards()
   const cardsEntries = Object.entries(cards)
   const [deck, setDeck] = useState([])
-  const [cardsCount, setCardsCount] = useState(0)
-  const [deckSize] = useState(30)
+  const [addedCardsAmount, setAddedCardsAmount] = useState({})
+  const [deckSize, setDeckSize] = useState(30)
   const [loading, setLoading] = useState(true)
 
   const addCard = (card) => {
-    // WIP: add condition if Renathal is added
-    if (cardsCount >= deckSize) {
+    let localDeckSize = deckSize
+
+    // Specific condition to when this card is added
+    if (card.id === 79767) {
+      localDeckSize = 40
+      setDeckSize(40)
+    }
+
+    if (deck.length >= localDeckSize) {
       return
     }
 
-    const newDeck = [...deck]
+    const cardId = card.id
+    const cardExists = addedCardsAmount[cardId]
+    console.log('addedCardsAmount', addedCardsAmount)
 
-    // WIP: increment quantity if card already in deck
-    card.quantity = 1
+    // rarityId = 5 (Legendary card)
+    // Dont add the card if is already on the deck and has 2 copies of it
+    // or the card is legendary and it has a copy already
+    if (cardExists && (cardExists >= 2 || card.rarityId === 5)) {
+      return
+    }
 
-    newDeck.push(card)
+    const deckCopy = [...deck]
+    const cardAddedAmountCopy = { ...addedCardsAmount }
 
-    setDeck(newDeck)
-    setCardsCount(prevState => prevState + 1)
+    if (cardExists) {
+      cardAddedAmountCopy[cardId] += 1
+    } else {
+      cardAddedAmountCopy[cardId] = 1
+      deckCopy.push(card)
+    }
+
+    setAddedCardsAmount(prevState => ({
+      ...prevState,
+      ...cardAddedAmountCopy
+    }))
+    setDeck(deckCopy)
+  }
+
+  const getDeckLength = () => {
+    let deckLength = 0
+
+    Object.values(addedCardsAmount).forEach((cardAmount) => {
+      deckLength += cardAmount
+    })
+
+    return deckLength
   }
 
   useEffect(() => {
@@ -66,8 +100,8 @@ const DeckBuilder = () => {
                       <h2 className='title'>{value}</h2>
                       <div className='cards'>
                         {cards.map((card) => (
-                          <div key={card.id} onClick={() => addCard(card)}>
-                            <img className='image' src={card.image} alt={card.name} />
+                          <div key={card.id} className='cardContainer' onClick={() => addCard(card)}>
+                            <img src={card.image} alt={card.name} />
                           </div>
                         ))}
                       </div>
@@ -83,14 +117,14 @@ const DeckBuilder = () => {
                 <div className='topBorder' />
                 <div className='titleContainer'>
                   <h3 className='heroTitle'>Standard {HEROS_NAME[hero]} Deck</h3>
-                  <h3 className='cardsCount'>{cardsCount} / {deckSize}</h3>
+                  <h3 className='cardsCount'>{getDeckLength()} / {deckSize}</h3>
                 </div>
                 <div style={{ backgroundImage: `url(../src/assets/classesBackground/${hero}.jpg)` }} className='heroBackground' />
               </div>
             </div>
             <div className='deck'>
               {deck.map((card) => (
-                <img key={card.id} className='image' src={card.cropImage} alt={card.name} />
+                <img key={card.id} src={card.cropImage} alt={card.name} />
               ))}
             </div>
             <div className='deckBottom' />

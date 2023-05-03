@@ -30,7 +30,7 @@ const Cards = () => {
                   <h2 className='title'>{value}</h2>
                   <div className='cards'>
                     {cards.map((card) => (
-                      <img key={card.id} className='image' src={card.image} alt={card.name} />
+                      <img key={card.id} src={card.image} alt={card.name} />
                     ))}
                   </div>
                 </div>
