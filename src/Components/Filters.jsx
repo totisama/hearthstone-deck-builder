@@ -24,6 +24,10 @@ const Filters = ({ deckBuilder = false }) => {
     setFilter('textFilter', debouncedFromTextFilter)
   }, [debouncedFromTextFilter])
 
+  useEffect(() => {
+    setSearch(filters.textFilter)
+  }, [filters.textFilter])
+
   return (
     <section className='filters'>
       <div className='mainFilters'>
@@ -55,7 +59,7 @@ const Filters = ({ deckBuilder = false }) => {
               )
             : null}
           <ManaFilter />
-          <input type='text' defaultValue={filters.textFilter} placeholder='Search' onChange={(event) => setSearch(event.target.value)} />
+          <input type='text' value={search} placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
         </div>
         <div className='subFiltersButton'>
           <button onClick={() => setShowSubFilters(!showSubFilters)}>More Filters</button>
