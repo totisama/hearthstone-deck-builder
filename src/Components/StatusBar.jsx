@@ -6,7 +6,7 @@ import { NUMBER_FILTERS_KEY } from '../constants'
 
 const StatusBar = ({ deckBuilder = false }) => {
   const { removeFilter, removeAllFilters } = useFilters()
-  const { status } = useStatusBar()
+  const { status } = useStatusBar({ deckBuilder })
   const {
     cardCount,
     statusFilters,

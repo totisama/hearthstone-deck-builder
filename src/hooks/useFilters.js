@@ -26,9 +26,13 @@ export const useFilters = () => {
     return queryParams.toString()
   }
 
-  const getStatusFilters = () => {
+  const getStatusFilters = (deckBuilder = false) => {
     const notShownFilters = ['locale', 'set', 'pageSize', 'sort']
     const statusFilters = {}
+
+    if (deckBuilder) {
+      notShownFilters.push('class')
+    }
 
     Object.entries(filters).forEach(([key, value]) => {
       if (value !== '' && !notShownFilters.includes(key)) {
