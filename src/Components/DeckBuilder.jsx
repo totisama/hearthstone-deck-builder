@@ -100,10 +100,10 @@ const DeckBuilder = () => {
         <Filters deckBuilder />
         <main className='deckBuilderContainer'>
           <div className='heroCardsContainer'>
-            <StatusBar deckBuilder />
             {cardsEntries.length > 0
               ? (
                 <>
+                  <StatusBar deckBuilder />
                   {cardsEntries.map(([value, cards]) => (
                     <div key={value}>
                       <h2 className='title'>{value}</h2>

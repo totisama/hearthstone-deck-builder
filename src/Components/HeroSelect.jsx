@@ -1,7 +1,6 @@
 import '../Styles/HeroSelect.scss'
 import { useNavigate } from 'react-router-dom'
 import { HERO_CLASSES } from '../constants'
-import { useEffect } from 'react'
 import { useCards } from '../hooks/useCards'
 import { useFilters } from '../hooks/useFilters'
 
@@ -14,16 +13,13 @@ const HeroSelect = () => {
 
   const goToDeckbuilder = (value) => {
     removeAllFilters()
+    resetCards()
 
     const classFilter = value + ',neutral'
     setFilter('class', classFilter)
 
     navigate('/deckbuilder/' + value)
   }
-
-  useEffect(() => {
-    resetCards()
-  }, [])
 
   return (
     <main className='heroSelectionContainer'>

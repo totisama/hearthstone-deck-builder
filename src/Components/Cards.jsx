@@ -20,7 +20,10 @@ const Cards = () => {
   return (
     <>
       <Filters />
-      <StatusBar />
+      {cardsEntries.length > 0
+        ? (
+          <StatusBar />)
+        : null}
       <main>
         {cardsEntries.length > 0
           ? (
