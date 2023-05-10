@@ -142,7 +142,12 @@ const DeckBuilder = () => {
             </div>
             <div className='deck'>
               {deck.map((card) => (
-                <img key={card.id} src={card.cropImage} alt={card.name} />
+                <div key={card.id} className='deckCardContainer'>
+                  <span className='deckCardMana'>{card.manaCost}</span>
+                  <span className='deckCardName'>{card.name}</span>
+                  <img src={card.cropImage} alt={card.name} />
+                  <span className='deckCardAmount'>{addedCardsAmount[card.id]}</span>
+                </div>
               ))}
             </div>
             <div className='deckBottom' />
