@@ -30,7 +30,7 @@ const DeckBuilder = () => {
       setDeckSize(40)
     }
 
-    if (getDeckLength() >= localDeckSize) {
+    if (getDeckSize() >= localDeckSize) {
       return
     }
 
@@ -61,14 +61,42 @@ const DeckBuilder = () => {
     setDeck(deckCopy)
   }
 
-  const getDeckLength = () => {
-    let deckLength = 0
+  const removeCard = (card) => {
+    const cardId = card.id
+
+    if (!addedCardsAmount[cardId] || addedCardsAmount[cardId] === 0) {
+      return
+    }
+
+    // Specific condition to when this card is added
+    if (card.id === 79767) {
+      setDeckSize(30)
+    }
+
+    const cardAddedAmountCopy = { ...addedCardsAmount }
+    let deckCopy = [...deck]
+
+    cardAddedAmountCopy[cardId] -= 1
+
+    if (cardAddedAmountCopy[cardId] === 0) {
+      deckCopy = deckCopy.filter(card => card.id !== cardId)
+    }
+
+    setAddedCardsAmount(prevState => ({
+      ...prevState,
+      ...cardAddedAmountCopy
+    }))
+    setDeck(deckCopy)
+  }
+
+  const getDeckSize = () => {
+    let deckSize = 0
 
     Object.values(addedCardsAmount).forEach((cardAmount) => {
-      deckLength += cardAmount
+      deckSize += cardAmount
     })
 
-    return deckLength
+    return deckSize
   }
 
   const getCardAmountClasses = (cardId, cardRarity) => {
@@ -79,6 +107,20 @@ const DeckBuilder = () => {
     }
 
     return classes
+  }
+
+  const cardLimit = (id, rarityId) => {
+    let className = ''
+
+    if ((addedCardsAmount[id] === 1 && rarityId === 5) ||
+      addedCardsAmount[id] === 2
+    ) {
+      className = 'amountLimit'
+    }
+
+    // WIP condiciones cuando es death knight
+
+    return className
   }
 
   useEffect(() => {
@@ -110,7 +152,7 @@ const DeckBuilder = () => {
                       <div className='cards'>
                         {cards.map((card) => (
                           <div key={card.id} className='cardContainer' onClick={() => addCard(card)}>
-                            <img src={card.image} alt={card.name} />
+                            <img src={card.image} alt={card.name} className={cardLimit(card.id, card.rarityId)} />
                             {addedCardsAmount[card.id]
                               ? (
                                 <div className={getCardAmountClasses(card.id, card.rarityId)}>
@@ -135,7 +177,7 @@ const DeckBuilder = () => {
                 <div className='topBorder' />
                 <div className='titleContainer'>
                   <h3 className='heroTitle'>Standard {HEROS_NAME[hero]} Deck</h3>
-                  <h3 className='cardsCount'>{getDeckLength()} / {deckSize}</h3>
+                  <h3 className='cardsCount'>{getDeckSize()} / {deckSize}</h3>
                 </div>
                 <div style={{ backgroundImage: `url(../src/assets/classesBackground/${hero}.jpg)` }} className='heroBackground' />
               </div>
@@ -147,6 +189,10 @@ const DeckBuilder = () => {
                   <span className='deckCardName'>{card.name}</span>
                   <img src={card.cropImage} alt={card.name} />
                   <span className='deckCardAmount'>{addedCardsAmount[card.id]}</span>
+                  <div className='deckCardActions'>
+                    <span className='deckCardAction leftAction' onClick={() => addCard(card)}>+</span>
+                    <span className='deckCardAction rightAction' onClick={() => removeCard(card)}>-</span>
+                  </div>
                 </div>
               ))}
             </div>

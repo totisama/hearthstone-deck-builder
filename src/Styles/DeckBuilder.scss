@@ -91,7 +91,7 @@
   line-height: 44px;
   height: 44px;
   background-color: #232323;
-  border-radius: 100px 20px 20px 100px;
+  border-radius: 50px 0px 0px 50px;
   display: flex;
   align-items: center;
   position: relative;
@@ -169,10 +169,46 @@
 }
 
 .deckCardActions {
-  display: flex;
+  display: none;
   position: absolute;
   width: 100px;
   height: 44px;
   right: 30px;
-  background-color: blue;
+  background-color: #232323e4;
+}
+
+.deckCardAction {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  font-size: 35px;
+  color: $yellow;
+}
+
+.deckCardContainer:hover {
+  border: 1px solid $yellow;
+}
+
+.deckCardContainer:hover .deckCardActions {
+  display: flex;
+}
+
+.deckCardAction:hover {
+  color: $white;
+}
+
+.leftAction {
+  border-width: 0px 2px;
+  border-color: gray;
+  border-style: solid;
+}
+
+.rightAction {
+  border-right: 2px solid gray;
+}
+
+.amountLimit {
+  filter: brightness(0.6);
 }
