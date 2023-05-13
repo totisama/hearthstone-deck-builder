@@ -35,29 +35,26 @@ const DeckBuilder = () => {
     }
 
     const cardId = card.id
-    const cardExists = addedCardsAmount[cardId]
+    const cardAmount = addedCardsAmount[cardId]
 
     // rarityId = 5 (Legendary card)
     // Dont add the card if is already on the deck and has 2 copies of it
     // or the card is legendary and it has a copy already
-    if (cardExists && (cardExists >= 2 || card.rarityId === 5)) {
+    if (cardAmount && (cardAmount >= 2 || card.rarityId === 5)) {
       return
     }
 
     const deckCopy = [...deck]
-    const cardAddedAmountCopy = { ...addedCardsAmount }
+    const addedCardsAmountCopy = { ...addedCardsAmount }
 
-    if (cardExists) {
-      cardAddedAmountCopy[cardId] += 1
+    if (cardAmount) {
+      addedCardsAmountCopy[cardId] += 1
     } else {
-      cardAddedAmountCopy[cardId] = 1
+      addedCardsAmountCopy[cardId] = 1
       deckCopy.push(card)
     }
 
-    setAddedCardsAmount(prevState => ({
-      ...prevState,
-      ...cardAddedAmountCopy
-    }))
+    setAddedCardsAmount(addedCardsAmountCopy)
     setDeck(deckCopy)
   }
 
@@ -68,24 +65,28 @@ const DeckBuilder = () => {
       return
     }
 
+    const isRenathal = cardId === 79767
+
+    if (isRenathal && getDeckSize() > 30) {
+      // WIP: Add alert
+      return
+    }
+
     // Specific condition to when this card is added
-    if (card.id === 79767) {
+    if (isRenathal) {
       setDeckSize(30)
     }
 
-    const cardAddedAmountCopy = { ...addedCardsAmount }
+    const addedCardsAmountCopy = { ...addedCardsAmount }
     let deckCopy = [...deck]
 
-    cardAddedAmountCopy[cardId] -= 1
+    addedCardsAmountCopy[cardId] -= 1
 
-    if (cardAddedAmountCopy[cardId] === 0) {
+    if (addedCardsAmountCopy[cardId] === 0) {
       deckCopy = deckCopy.filter(card => card.id !== cardId)
     }
 
-    setAddedCardsAmount(prevState => ({
-      ...prevState,
-      ...cardAddedAmountCopy
-    }))
+    setAddedCardsAmount(addedCardsAmountCopy)
     setDeck(deckCopy)
   }
 
