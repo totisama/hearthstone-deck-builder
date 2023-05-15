@@ -19,13 +19,16 @@ const DeckBuilder = () => {
   const [deck, setDeck] = useState([])
   const [addedCardsAmount, setAddedCardsAmount] = useState({})
   const [deckSize, setDeckSize] = useState(30)
+  const [currentRunes, setCurrentRunes] = useState({ blood: 0, frost: 0, unholy: 0 })
+  const [isDeathKnigth, setIsDeathKnigth] = useState(false)
   const [loading, setLoading] = useState(true)
 
   const addCard = (card) => {
+    const cardId = card.id
     let localDeckSize = deckSize
 
     // Specific condition to when this card is added
-    if (card.id === 79767) {
+    if (cardId === 79767) {
       localDeckSize = 40
       setDeckSize(40)
     }
@@ -34,7 +37,6 @@ const DeckBuilder = () => {
       return
     }
 
-    const cardId = card.id
     const cardAmount = addedCardsAmount[cardId]
 
     // rarityId = 5 (Legendary card)
@@ -42,6 +44,27 @@ const DeckBuilder = () => {
     // or the card is legendary and it has a copy already
     if (cardAmount && (cardAmount >= 2 || card.rarityId === 5)) {
       return
+    }
+
+    const runeCost = card.runeCost
+    if (isDeathKnigth && runeCost) {
+      const canAddCard = compareIncomingRunes(runeCost)
+
+      if (!canAddCard) {
+        return
+      }
+
+      const currentRunesCopy = { ...currentRunes }
+
+      for (const [name, value] of Object.entries(runeCost)) {
+        if (value === 0 || value < currentRunesCopy[name]) {
+          continue
+        }
+
+        currentRunesCopy[name] = value
+      }
+
+      setCurrentRunes(currentRunesCopy)
     }
 
     const deckCopy = [...deck]
@@ -56,6 +79,37 @@ const DeckBuilder = () => {
 
     setAddedCardsAmount(addedCardsAmountCopy)
     setDeck(deckCopy)
+  }
+
+  const compareIncomingRunes = (incomingRunes) => {
+    let canAdd = true
+
+    for (const [incomingName, incomingValue] of Object.entries(incomingRunes)) {
+      if (incomingValue === 0) {
+        continue
+      }
+
+      for (const [currentRuneName, currentRuneValue] of Object.entries(currentRunes)) {
+        if ((incomingName !== currentRuneName && currentRuneValue + incomingValue > 3) ||
+          (getRunesAmount() === 3 && incomingValue > currentRunes[incomingName])
+        ) {
+          canAdd = false
+          break
+        }
+      }
+    }
+
+    return canAdd
+  }
+
+  const getRunesAmount = () => {
+    let runesSize = 0
+
+    Object.values(currentRunes).forEach((amount) => {
+      runesSize += amount
+    })
+
+    return runesSize
   }
 
   const removeCard = (card) => {
@@ -110,7 +164,7 @@ const DeckBuilder = () => {
     return classes
   }
 
-  const cardLimit = (id, rarityId) => {
+  const cardAddedFilter = (id, rarityId, runeCost) => {
     let className = ''
 
     if ((addedCardsAmount[id] === 1 && rarityId === 5) ||
@@ -118,8 +172,6 @@ const DeckBuilder = () => {
     ) {
       className = 'amountLimit'
     }
-
-    // WIP condiciones cuando es death knight
 
     return className
   }
@@ -133,6 +185,10 @@ const DeckBuilder = () => {
 
     const classFilter = hero + ',neutral'
     setFilter('class', classFilter)
+
+    if (hero === 'deathknight') {
+      setIsDeathKnigth(true)
+    }
 
     setLoading(false)
   }, [])
@@ -153,7 +209,7 @@ const DeckBuilder = () => {
                       <div className='cards'>
                         {cards.map((card) => (
                           <div key={card.id} className='cardContainer' onClick={() => addCard(card)}>
-                            <img src={card.image} alt={card.name} className={cardLimit(card.id, card.rarityId)} />
+                            <img src={card.image} alt={card.name} className={cardAddedFilter(card.id, card.rarityId, card?.runeCost)} />
                             {addedCardsAmount[card.id]
                               ? (
                                 <div className={getCardAmountClasses(card.id, card.rarityId)}>
