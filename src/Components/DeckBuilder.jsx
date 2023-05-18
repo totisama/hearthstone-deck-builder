@@ -74,6 +74,7 @@ const DeckBuilder = () => {
 
   const updateCurrentRunes = (runeCost) => {
     const currentRunesCopy = { ...currentRunes }
+    const runeAmount = getRunesAmount()
     let currentRunesNameCopy = [...currentRunesName]
 
     for (const [name, value] of Object.entries(runeCost)) {
@@ -81,7 +82,7 @@ const DeckBuilder = () => {
         continue
       }
 
-      if (getRunesAmount() < 3) {
+      if (runeAmount < 3) {
         for (let index = 0; index < value - currentRunes[name]; index++) {
           const emptyIndex = currentRunesNameCopy.findIndex((element) => element === '')
 
@@ -99,32 +100,38 @@ const DeckBuilder = () => {
   }
 
   const compareIncomingRunes = (incomingRunes) => {
-    let canAdd = true
+    const runeAmount = getRunesAmount()
 
     for (const [incomingName, incomingValue] of Object.entries(incomingRunes)) {
       if (incomingValue === 0) {
         continue
       }
 
+      let canAdd = true
+
       for (const [currentRuneName, currentRuneValue] of Object.entries(currentRunes)) {
-        if ((incomingName !== currentRuneName && currentRuneValue + incomingValue > 3) ||
-          (getRunesAmount() === 3 && incomingValue > currentRunes[incomingName])
+        if (
+          (incomingName !== currentRuneName && currentRuneValue + incomingValue > 3) ||
+        (runeAmount === 3 && incomingValue > currentRunes[incomingName])
         ) {
           canAdd = false
           break
         }
       }
+
+      if (!canAdd) {
+        return false
+      }
     }
 
-    return canAdd
+    return true
   }
 
   const getRunesAmount = () => {
-    let runesSize = 0
-
-    Object.values(currentRunes).forEach((amount) => {
-      runesSize += amount
-    })
+    const runesSize = Object.values(currentRunes).reduce(
+      (accumulator, value) => accumulator + value,
+      0
+    )
 
     return runesSize
   }
@@ -150,7 +157,7 @@ const DeckBuilder = () => {
 
     const runeCost = card.runeCost
     if (isDeathKnigth && runeCost) {
-      removeRunesFromcard(runeCost, cardId)
+      removeRunesFromCard(runeCost, cardId)
     }
 
     const addedCardsAmountCopy = { ...addedCardsAmount }
@@ -166,96 +173,65 @@ const DeckBuilder = () => {
     setDeck(deckCopy)
   }
 
-  const removeRunesFromcard = (runeCost, cardId) => {
+  const removeRunesFromCard = (runeCost, cardId) => {
     const localRunes = { blood: 0, frost: 0, unholy: 0 }
 
     if (getDeckSize() === 1) {
       setCurrentRunesName(['', '', ''])
       setCurrentRunes(localRunes)
-
       return
     }
 
+    const removeRunesOfType = (runeType, count) => {
+      for (let index = 0; index < count; index++) {
+        const runeIndex = currentRunesNameCopy.findIndex((element) => element === runeType)
+
+        currentRunesNameCopy[runeIndex] = ''
+      }
+    }
+
+    const currentRunesNameCopy = [...currentRunesName]
+
     // Find the highest rune for each type left on the deck
     for (const card of deck) {
-      // WIP: Solve problem when same card id is left on deck
       if (!card.runeCost || (card.id === cardId && addedCardsAmount[cardId] === 1)) {
         continue
       }
 
-      if (card.runeCost.blood > localRunes.blood) {
-        localRunes.blood = card.runeCost.blood
+      const { blood, frost, unholy } = card.runeCost
+
+      if (blood > localRunes.blood) {
+        localRunes.blood = blood
       }
-      if (card.runeCost.frost > localRunes.frost) {
-        localRunes.frost = card.runeCost.frost
+      if (frost > localRunes.frost) {
+        localRunes.frost = frost
       }
-      if (card.runeCost.unholy > localRunes.unholy) {
-        localRunes.unholy = card.runeCost.unholy
+      if (unholy > localRunes.unholy) {
+        localRunes.unholy = unholy
       }
     }
 
     // Conditions to remove the amount of runes for each type depending on the highest rune left
-    let currentRunesNameCopy = [...currentRunesName]
-
-    // Blood conditions
     if (localRunes.blood < runeCost.blood) {
-      if (localRunes.blood > 0) {
-        for (let index = 0; index < runeCost.blood - localRunes.blood; index++) {
-          const bloodIndex = currentRunesNameCopy.findIndex((element) => element === 'blood')
-
-          currentRunesNameCopy = currentRunesNameCopy.with(bloodIndex, '')
-        }
-      } else {
-        const bloodAmount = currentRunesNameCopy.filter((element) => element === 'blood').length
-
-        for (let index = 0; index < bloodAmount; index++) {
-          const bloodIndex = currentRunesNameCopy.findIndex((element) => element === 'blood')
-
-          currentRunesNameCopy = currentRunesNameCopy.with(bloodIndex, '')
-        }
-      }
+      const bloodAmount = currentRunesNameCopy.filter((element) => element === 'blood').length
+      const bloodToRemove = Math.max(0, bloodAmount - localRunes.blood)
+      removeRunesOfType('blood', bloodToRemove)
     }
 
-    // Frost conditions
     if (localRunes.frost < runeCost.frost) {
-      if (localRunes.frost > 0) {
-        for (let index = 0; index < runeCost.frost - localRunes.frost; index++) {
-          const frostIndex = currentRunesNameCopy.findIndex((element) => element === 'frost')
-
-          currentRunesNameCopy = currentRunesNameCopy.with(frostIndex, '')
-        }
-      } else {
-        const frostAmount = currentRunesNameCopy.filter((element) => element === 'frost').length
-
-        for (let index = 0; index < frostAmount; index++) {
-          const frostIndex = currentRunesNameCopy.findIndex((element) => element === 'frost')
-
-          currentRunesNameCopy = currentRunesNameCopy.with(frostIndex, '')
-        }
-      }
+      const frostAmount = currentRunesNameCopy.filter((element) => element === 'frost').length
+      const frostToRemove = Math.max(0, frostAmount - localRunes.frost)
+      removeRunesOfType('frost', frostToRemove)
     }
 
-    // Unholy conditions
     if (localRunes.unholy < runeCost.unholy) {
-      if (localRunes.unholy > 0) {
-        for (let index = 0; index < runeCost.unholy - localRunes.unholy; index++) {
-          const unholyIndex = currentRunesNameCopy.findIndex((element) => element === 'unholy')
-
-          currentRunesNameCopy = currentRunesNameCopy.with(unholyIndex, '')
-        }
-      } else {
-        const unholyAmount = currentRunesNameCopy.filter((element) => element === 'unholy').length
-
-        for (let index = 0; index < unholyAmount; index++) {
-          const unholyIndex = currentRunesNameCopy.findIndex((element) => element === 'unholy')
-
-          currentRunesNameCopy = currentRunesNameCopy.with(unholyIndex, '')
-        }
-      }
+      const unholyAmount = currentRunesNameCopy.filter((element) => element === 'unholy').length
+      const unholyToRemove = Math.max(0, unholyAmount - localRunes.unholy)
+      removeRunesOfType('unholy', unholyToRemove)
     }
 
     setCurrentRunes(localRunes)
-    setCurrentRunesName(currentRunesNameCopy)
+    setCurrentRunesName(currentRunesNameCopy.sort())
   }
 
   const getDeckSize = () => {
