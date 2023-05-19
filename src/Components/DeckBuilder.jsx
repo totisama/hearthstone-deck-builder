@@ -49,7 +49,7 @@ const DeckBuilder = () => {
 
     const runeCost = card.runeCost
     if (isDeathKnigth && runeCost) {
-      const canAddCard = compareIncomingRunes(runeCost)
+      const canAddCard = cardAvailableToAdd(runeCost)
 
       if (!canAddCard) {
         return
@@ -74,7 +74,7 @@ const DeckBuilder = () => {
 
   const updateCurrentRunes = (runeCost) => {
     const currentRunesCopy = { ...currentRunes }
-    const runeAmount = getRunesAmount()
+    const runeAmount = getCurrentRunesAmount()
     let currentRunesNameCopy = [...currentRunesName]
 
     for (const [name, value] of Object.entries(runeCost)) {
@@ -99,8 +99,12 @@ const DeckBuilder = () => {
     setCurrentRunes(currentRunesCopy)
   }
 
-  const compareIncomingRunes = (incomingRunes) => {
-    const runeAmount = getRunesAmount()
+  const cardAvailableToAdd = (incomingRunes) => {
+    const currentRuneAmount = getCurrentRunesAmount()
+
+    if (currentRuneAmount === 0) {
+      return true
+    }
 
     for (const [incomingName, incomingValue] of Object.entries(incomingRunes)) {
       if (incomingValue === 0) {
@@ -111,8 +115,9 @@ const DeckBuilder = () => {
 
       for (const [currentRuneName, currentRuneValue] of Object.entries(currentRunes)) {
         if (
-          (incomingName !== currentRuneName && currentRuneValue + incomingValue > 3) ||
-        (runeAmount === 3 && incomingValue > currentRunes[incomingName])
+          (incomingName !== currentRuneName && currentRuneValue + incomingValue > 3 && currentRuneValue !== 0) ||
+          (currentRuneAmount === 3 && incomingValue > currentRunes[incomingName]) ||
+          (currentRuneValue === 3 && incomingValue > currentRunes[incomingName] && incomingName !== currentRuneName)
         ) {
           canAdd = false
           break
@@ -120,14 +125,14 @@ const DeckBuilder = () => {
       }
 
       if (!canAdd) {
-        return false
+        return canAdd
       }
     }
 
     return true
   }
 
-  const getRunesAmount = () => {
+  const getCurrentRunesAmount = () => {
     const runesSize = Object.values(currentRunes).reduce(
       (accumulator, value) => accumulator + value,
       0
@@ -263,40 +268,17 @@ const DeckBuilder = () => {
   const cardAddedFilter = (id, rarityId, runeCost) => {
     let className = ''
 
+    if (isDeathKnigth && runeCost) {
+      const canAdd = cardAvailableToAdd(runeCost)
+
+      className = canAdd ? '' : 'runeAmountLimit'
+    }
+
     if ((addedCardsAmount[id] === 1 && rarityId === 5) ||
       addedCardsAmount[id] === 2
     ) {
       className = 'amountLimit'
     }
-
-    // if (isDeathKnigth && runeCost) {
-    //   const amount = getRunesAmount()
-
-    //   if (amount === 0) {
-    //     return className
-    //   }
-
-    //   console.log('-----------------------------------------------')
-    //   for (const [name, value] of Object.entries(runeCost)) {
-    //     if (value === 0) {
-    //       continue
-    //     }
-
-    //     if (amount + value > 3) {
-    //       className = 'runeAmountLimit'
-    //     }
-
-    //     console.log(name, value)
-    //     // const runesSize = getRunesAmount()
-    //     // const bloodValue = runeCost.blood
-    //     // const frostValue = runeCost.frost
-    //     // const unholyValue = runeCost.unholy
-
-    //     // if (runesSize === 1) {
-
-    //     // }
-    //   }
-    // }
 
     return className
   }
