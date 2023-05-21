@@ -25,7 +25,7 @@ const HeroSelect = () => {
     <main className='heroSelectionContainer'>
       <div className='heroSelection'>
         {HERO_CLASSES.map((hero) => (
-          <button key={hero.id} className='heroButton' onClick={() => goToDeckbuilder(hero.value)}>
+          <button type='button' key={hero.id} className='heroButton' onClick={() => goToDeckbuilder(hero.value)}>
             <img src={assetsPath + hero.image} alt={hero.name} />
             <div className='heroName'>
               <h4>{hero.name}</h4>

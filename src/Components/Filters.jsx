@@ -32,11 +32,6 @@ const Filters = ({ deckBuilder = false }) => {
     <section className='filters'>
       <div className='mainFilters'>
         <div className='inputFilters'>
-          {/* {deckBuilder
-            ? (
-              <h1>deckBuilder</h1>
-              )
-            : null} */}
           {!deckBuilder
             ? (
               <select className='hidden' value={filters.set} onChange={(e) => handleOnChange(e, 'set')}>
@@ -62,7 +57,7 @@ const Filters = ({ deckBuilder = false }) => {
           <input type='text' value={search} placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
         </div>
         <div className='subFiltersButton'>
-          <button onClick={() => setShowSubFilters(!showSubFilters)}>More Filters</button>
+          <button type='button' onClick={() => setShowSubFilters(!showSubFilters)}>More Filters</button>
         </div>
       </div>
       {showSubFilters

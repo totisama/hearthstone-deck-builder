@@ -18,7 +18,7 @@ const ManaFilter = () => {
         ? (
           <div className='mana'>
             {MANA_COSTS.map((mana) => (
-              <button className='manaIcon' value={mana.slug} key={mana.slug} onClick={handleManaChange}>
+              <button type='button' className='manaIcon' value={mana.slug} key={mana.slug} onClick={handleManaChange}>
                 {mana.label}
               </button>
             ))}
