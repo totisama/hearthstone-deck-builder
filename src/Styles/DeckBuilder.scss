@@ -107,6 +107,17 @@
   }
 }
 
+.copyDeckButton {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(90deg, rgb(146, 27, 154) 0%, rgb(173,58,182) 50%, rgb(146,27,154) 100%);
+  border: 0px;
+  border-radius: 5px;
+  color: $white;
+  font-size: $normalFont;
+  font-size: 20px;
+}
+
 .locked {
   background: url(../assets/bgCardAmountLocked.png);
   width: 100px;
@@ -130,4 +141,9 @@
 
 .deckPastBreakPoint {
   height: 450px;
+}
+
+.copyDeckButton:hover {
+  cursor: pointer;
+  background: rgba(146,27,154,1);
 }

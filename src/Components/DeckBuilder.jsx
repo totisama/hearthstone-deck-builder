@@ -9,6 +9,8 @@ import DeckCards from './DeckCards'
 import DeckCard from './DeckCard'
 import RunesDisplay from './RunesDisplay'
 import { useScroll } from '../hooks/useScroll'
+import { getDeckCodeCardsId } from '../services'
+import { useMetadata } from '../hooks/useMetadata'
 
 const DeckBuilder = () => {
   const { hero } = useParams()
@@ -22,6 +24,7 @@ const DeckBuilder = () => {
   const [isDeathKnigth, setIsDeathKnigth] = useState(false)
   const [loading, setLoading] = useState(true)
   const { pastBreakPoint } = useScroll()
+  const { getClassIdByName } = useMetadata()
 
   const addCard = (card) => {
     const cardId = card.id
@@ -248,6 +251,26 @@ const DeckBuilder = () => {
     return deckSize
   }
 
+  const copyDeckCode = async () => {
+    const idsList = Object.entries(addedCardsAmount).reduce(
+      (accumulator, [id, amount]) => {
+        accumulator.push(id)
+
+        if (amount === 2) {
+          accumulator.push(id)
+        }
+
+        return accumulator
+      },
+      []
+    )
+
+    const classId = getClassIdByName(hero)
+    const deckCode = await getDeckCodeCardsId(idsList, classId)
+
+    navigator.clipboard.writeText(deckCode)
+  }
+
   const setClass = (type) => {
     let className = ''
 
@@ -306,7 +329,9 @@ const DeckBuilder = () => {
                 <DeckCard key={card.id} card={card} addedCardsAmount={addedCardsAmount} addCard={addCard} removeCard={removeCard} />
               ))}
             </div>
-            <div className='deckBottom' />
+            <div className='deckBottom'>
+              <button type='button' className='copyDeckButton' onClick={() => { copyDeckCode() }}>Copy deck code</button>
+            </div>
           </div>
         </main>
       </>)
