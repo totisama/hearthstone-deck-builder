@@ -123,3 +123,11 @@
 .runeAmountLimit {
   filter: sepia(97%) saturate(2) hue-rotate(315deg) brightness(93%) contrast(124%);
 }
+
+.deckContainerPastBreakpoint {
+  top: 50px;
+}
+
+.deckPastBreakPoint {
+  height: 450px;
+}

@@ -8,6 +8,7 @@ import Loader from './Loader'
 import DeckCards from './DeckCards'
 import DeckCard from './DeckCard'
 import RunesDisplay from './RunesDisplay'
+import { useScroll } from '../hooks/useScroll'
 
 const DeckBuilder = () => {
   const { hero } = useParams()
@@ -20,6 +21,7 @@ const DeckBuilder = () => {
   const [currentRunesName, setCurrentRunesName] = useState(['', '', ''])
   const [isDeathKnigth, setIsDeathKnigth] = useState(false)
   const [loading, setLoading] = useState(true)
+  const { pastBreakPoint } = useScroll()
 
   const addCard = (card) => {
     const cardId = card.id
@@ -246,6 +248,20 @@ const DeckBuilder = () => {
     return deckSize
   }
 
+  const setClass = (type) => {
+    let className = ''
+
+    if (pastBreakPoint) {
+      if (type === 'top') {
+        className = 'deckContainerPastBreakpoint'
+      } else if (type === 'heigth') {
+        className = 'deckPastBreakPoint'
+      }
+    }
+
+    return className
+  }
+
   useEffect(() => {
     if (!HEROS_LIST.includes(hero)) {
       navigate('/deckbuilder')
@@ -270,7 +286,7 @@ const DeckBuilder = () => {
         <main className='deckBuilderContainer'>
           <DeckCards addCard={addCard} addedCardsAmount={addedCardsAmount} isDeathKnigth={isDeathKnigth} cardAvailableToAdd={cardAvailableToAdd} />
 
-          <div className='deckContainer'>
+          <div className={`deckContainer ${setClass('top')}`}>
             <div className='topContainer'>
               <div className='top'>
                 <div className='topBorder' />
@@ -285,7 +301,7 @@ const DeckBuilder = () => {
               ? (
                 <RunesDisplay currentRunesName={currentRunesName} />)
               : null}
-            <div className='deck'>
+            <div className={`deck ${setClass('heigth')}`}>
               {deck.map((card) => (
                 <DeckCard key={card.id} card={card} addedCardsAmount={addedCardsAmount} addCard={addCard} removeCard={removeCard} />
               ))}
