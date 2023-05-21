@@ -6,6 +6,8 @@ import Filters from './Filters'
 import { useFilters } from '../hooks/useFilters'
 import Loader from './Loader'
 import DeckCards from './DeckCards'
+import DeckCard from './DeckCard'
+import RunesDisplay from './RunesDisplay'
 
 const DeckBuilder = () => {
   const { hero } = useParams()
@@ -244,12 +246,6 @@ const DeckBuilder = () => {
     return deckSize
   }
 
-  const getRuneClass = (value, index) => {
-    const className = `rune ${value}`
-
-    return className
-  }
-
   useEffect(() => {
     if (!HEROS_LIST.includes(hero)) {
       navigate('/deckbuilder')
@@ -273,6 +269,7 @@ const DeckBuilder = () => {
         <Filters deckBuilder />
         <main className='deckBuilderContainer'>
           <DeckCards addCard={addCard} addedCardsAmount={addedCardsAmount} isDeathKnigth={isDeathKnigth} cardAvailableToAdd={cardAvailableToAdd} />
+
           <div className='deckContainer'>
             <div className='topContainer'>
               <div className='top'>
@@ -286,26 +283,11 @@ const DeckBuilder = () => {
             </div>
             {isDeathKnigth
               ? (
-                <div className='runesContainer'>
-                  <div className='runes'>
-                    {currentRunesName.map((value, index) =>
-                      <div key={index} className={getRuneClass(value, index)} />
-                    )}
-                  </div>
-                </div>)
+                <RunesDisplay currentRunesName={currentRunesName} />)
               : null}
             <div className='deck'>
               {deck.map((card) => (
-                <div key={card.id} className='deckCardContainer'>
-                  <span className='deckCardMana'>{card.manaCost}</span>
-                  <span className='deckCardName'>{card.name}</span>
-                  <img src={card.cropImage} alt={card.name} />
-                  <span className='deckCardAmount'>{addedCardsAmount[card.id]}</span>
-                  <div className='deckCardActions'>
-                    <span className='deckCardAction leftAction' onClick={() => addCard(card)}>+</span>
-                    <span className='deckCardAction rightAction' onClick={() => removeCard(card)}>-</span>
-                  </div>
-                </div>
+                <DeckCard key={card.id} card={card} addedCardsAmount={addedCardsAmount} addCard={addCard} removeCard={removeCard} />
               ))}
             </div>
             <div className='deckBottom' />
