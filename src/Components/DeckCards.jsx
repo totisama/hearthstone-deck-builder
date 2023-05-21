@@ -42,7 +42,7 @@ const DeckCards = ({
   }
 
   return (
-    <div className='heroCardsContainer'>
+    <div className='deckCardsContainer'>
       {cardsEntries.length > 0
         ? (
           <>

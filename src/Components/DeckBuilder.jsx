@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import '../Styles/DeckBuilder.scss'
 import { useParams, useNavigate } from 'react-router-dom'
-import { HEROS_LIST, HEROS_NAME } from '../constants'
+import { HEROS_LIST, HEROS_NAME, WINDOW_SIZES } from '../constants'
 import Filters from './Filters'
 import { useFilters } from '../hooks/useFilters'
 import Loader from './Loader'
@@ -9,8 +8,11 @@ import DeckCards from './DeckCards'
 import DeckCard from './DeckCard'
 import RunesDisplay from './RunesDisplay'
 import { useScroll } from '../hooks/useScroll'
+import { useResizeWindow } from '../hooks/useResizeWindow'
 import { getDeckCodeCardsId } from '../services'
 import { useMetadata } from '../hooks/useMetadata'
+import HamburgerDeck from './HamburgerDeck'
+import '../Styles/DeckBuilder.scss'
 
 const DeckBuilder = () => {
   const { hero } = useParams()
@@ -24,6 +26,7 @@ const DeckBuilder = () => {
   const [isDeathKnigth, setIsDeathKnigth] = useState(false)
   const [loading, setLoading] = useState(true)
   const { pastBreakPoint } = useScroll()
+  const { screenSize } = useResizeWindow()
   const { getClassIdByName } = useMetadata()
 
   const addCard = (card) => {
@@ -309,30 +312,36 @@ const DeckBuilder = () => {
         <main className='deckBuilderContainer'>
           <DeckCards addCard={addCard} addedCardsAmount={addedCardsAmount} isDeathKnigth={isDeathKnigth} cardAvailableToAdd={cardAvailableToAdd} />
 
-          <div className={`deckContainer ${setClass('top')}`}>
-            <div className='topContainer'>
-              <div className='top'>
-                <div className='topBorder' />
-                <div className='titleContainer'>
-                  <h3 className='heroTitle'>Standard {HEROS_NAME[hero]} Deck</h3>
-                  <h3 className='cardsCount'>{getDeckSize()} / {deckSize}</h3>
+          {screenSize === WINDOW_SIZES.LARGE || screenSize === WINDOW_SIZES.MEDIUM
+            ? (
+              <div className={`deckContainer ${setClass('top')}`}>
+                <div className='topContainer'>
+                  <div className='top'>
+                    <div className='topBorder' />
+                    <div className='titleContainer'>
+                      <h3 className='heroTitle'>Standard {HEROS_NAME[hero]} Deck</h3>
+                      <h3 className='cardsCount'>{getDeckSize()} / {deckSize}</h3>
+                    </div>
+                    <div style={{ backgroundImage: `url(../src/assets/classesBackground/${hero}.jpg)` }} className='heroBackground' />
+                  </div>
                 </div>
-                <div style={{ backgroundImage: `url(../src/assets/classesBackground/${hero}.jpg)` }} className='heroBackground' />
-              </div>
-            </div>
-            {isDeathKnigth
-              ? (
-                <RunesDisplay currentRunesName={currentRunesName} />)
-              : null}
-            <div className={`deck ${setClass('heigth')}`}>
-              {deck.map((card) => (
-                <DeckCard key={card.id} card={card} addedCardsAmount={addedCardsAmount} addCard={addCard} removeCard={removeCard} />
-              ))}
-            </div>
-            <div className='deckBottom'>
-              <button type='button' className='copyDeckButton' onClick={() => { copyDeckCode() }}>Copy deck code</button>
-            </div>
-          </div>
+                {isDeathKnigth
+                  ? (
+                    <RunesDisplay currentRunesName={currentRunesName} />)
+                  : null}
+                <div className={`deck ${setClass('heigth')}`}>
+                  {deck.map((card) => (
+                    <DeckCard key={card.id} card={card} addedCardsAmount={addedCardsAmount} addCard={addCard} removeCard={removeCard} />
+                  ))}
+                </div>
+                <div className='deckBottom'>
+                  <button type='button' className='copyDeckButton' onClick={() => { copyDeckCode() }}>Copy deck code</button>
+                </div>
+              </div>)
+            : <HamburgerDeck
+                deckSize={deckSize} getDeckSize={getDeckSize} isDeathKnigth={isDeathKnigth} currentRunesName={currentRunesName} deck={deck} addedCardsAmount={addedCardsAmount}
+                addCard={addCard} removeCard={removeCard} copyDeckCode={copyDeckCode}
+              />}
         </main>
       </>)
     : <Loader />
