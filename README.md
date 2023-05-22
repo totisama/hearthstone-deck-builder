@@ -4,9 +4,16 @@
 
 The purpose of this project was to practice my React skills trying to replicate most of the functionalities and design of the official Hearthstone page: https://hearthstone.blizzard.com/en-us/cards
 
-The project is divided in two sections. The first one is a page to look for cards using different filters. The second one (Still In Progress) will give the user the option to choose a Hero, create a deck of 30 cards and be able to copy the deck to use it inside of the game.
+The project is divided in two sections. The first one is a page to search for cards using different filters. The second one will give the user the option to choose a Hero, create a deck and be able to generate the deck code to use it inside of the game.
 
-Most of the information shown was obtained through the Blizzard API https://develop.battle.net
+Most of the information and images shown were obtained through the Blizzard API https://develop.battle.net and the official Hearthstone page https://hearthstone.blizzard.com/en-us/cards
+
+Card library:
+![Alt text](/public/cardsLibrary.png 'Cards Library')
+
+Deck builder:
+![Alt text](/public/heroSelect.png 'Hero Select')
+![Alt text](/public/deckBuilder.png 'Deck Builder')
 
 ## Getting Started
 
