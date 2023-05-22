@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { ASSETS_PATH, HEROS_NAME } from '../constants'
+import { HEROS_NAME } from '../constants'
 import { useDeck } from '../hooks/useDeck'
 import DeckCard from './DeckCard'
 import RunesDisplay from './RunesDisplay'
@@ -26,7 +26,7 @@ const HamburgerDeck = () => {
                   <h3 className='heroTitle'>Standard {HEROS_NAME[hero]} Deck</h3>
                   <h3 className='cardsCount'>{currentDeckSize} / {deckSize}</h3>
                 </div>
-                <div style={{ backgroundImage: `url(${ASSETS_PATH}classesBackground/${hero}.jpg)` }} className='heroBackground' />
+                <div className={`heroBackground ${hero}Background`} />
               </div>
             </div>
             {isDeathKnigth
