@@ -9,6 +9,7 @@ import { RestLink } from 'apollo-link-rest'
 import { MetadataProvider } from './Context/Metadata'
 import { FiltersProvider } from './Context/Filters'
 import { CardsProvider } from './Context/Cards'
+import { DeckProvider } from './Context/Deck'
 
 const restLink = new RestLink({ uri: API_HOST })
 
@@ -23,7 +24,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <MetadataProvider>
         <FiltersProvider>
           <CardsProvider>
-            <App />
+            <DeckProvider>
+              <App />
+            </DeckProvider>
           </CardsProvider>
         </FiltersProvider>
       </MetadataProvider>
