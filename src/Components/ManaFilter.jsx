@@ -5,14 +5,11 @@ import '../Styles/ManaFilter.scss'
 import { useResizeWindow } from './../hooks/useResizeWindow'
 
 const ManaFilter = () => {
-  const { setFilters, filters } = useFilters()
+  const { setFilter, filters } = useFilters()
   const { screenSize } = useResizeWindow()
 
   const handleManaChange = (event) => {
-    setFilters(prevState => ({
-      ...prevState,
-      manaCost: event.target.value
-    }))
+    setFilter('manaCost', event.target.value)
   }
 
   return (
@@ -21,7 +18,7 @@ const ManaFilter = () => {
         ? (
           <div className='mana'>
             {MANA_COSTS.map((mana) => (
-              <button className='manaIcon' value={mana.slug} key={mana.slug} onClick={handleManaChange}>
+              <button type='button' className='manaIcon' value={mana.slug} key={mana.slug} onClick={handleManaChange}>
                 {mana.label}
               </button>
             ))}

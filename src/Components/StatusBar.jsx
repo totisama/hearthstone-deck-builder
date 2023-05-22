@@ -4,9 +4,9 @@ import { useStatusBar } from '../hooks/useStatusBar'
 import clearIcon from '../assets/clear-icon.svg'
 import { NUMBER_FILTERS_KEY } from '../constants'
 
-const StatusBar = () => {
+const StatusBar = ({ deckBuilder = false }) => {
   const { removeFilter, removeAllFilters } = useFilters()
-  const { status } = useStatusBar()
+  const { status } = useStatusBar({ deckBuilder })
   const {
     cardCount,
     statusFilters,
@@ -19,7 +19,7 @@ const StatusBar = () => {
       <div className='removableFilters'>
         <h1>{cardCount} cards found for "{set}"</h1>
         {statusFiltersEntries.map(([key, value]) => (
-          <button key={value} onClick={() => { removeFilter(key) }}>
+          <button type='button' key={value} onClick={() => { removeFilter(key) }}>
             {NUMBER_FILTERS_KEY[key]
               ? NUMBER_FILTERS_KEY[key] + ': ' + value
               : value}
@@ -28,7 +28,7 @@ const StatusBar = () => {
         ))}
         {statusFiltersEntries.length > 1
           ? (
-            <button onClick={() => { removeAllFilters() }}>
+            <button type='button' onClick={() => { removeAllFilters(deckBuilder) }}>
               <img src={clearIcon} />
               Clear All
             </button>)

@@ -7,7 +7,8 @@ query Metadata {
     classes {
       id
       slug
-      name
+      name,
+      cardId
     }
     keywords {
       id

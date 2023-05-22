@@ -1,18 +1,29 @@
 import '../Styles/Cards.scss'
+import { useEffect } from 'react'
 import { useCards } from '../hooks/useCards'
+import { useFilters } from '../hooks/useFilters'
 import { InView } from 'react-intersection-observer'
 import NoCards from './NoCards'
 import Filters from './Filters'
 import StatusBar from './StatusBar'
 
 const Cards = () => {
-  const { cards, getNewCards } = useCards()
+  const { removeAllFilters } = useFilters()
+  const { cards, getNewCards, resetCards } = useCards()
   const cardsEntries = Object.entries(cards)
+
+  useEffect(() => {
+    resetCards()
+    removeAllFilters()
+  }, [])
 
   return (
     <>
       <Filters />
-      <StatusBar />
+      {cardsEntries.length > 0
+        ? (
+          <StatusBar />)
+        : null}
       <main>
         {cardsEntries.length > 0
           ? (
@@ -22,7 +33,7 @@ const Cards = () => {
                   <h2 className='title'>{value}</h2>
                   <div className='cards'>
                     {cards.map((card) => (
-                      <img key={card.id} className='image' src={card.image} alt={card.name} />
+                      <img key={card.id} src={card.image} alt={card.name} />
                     ))}
                   </div>
                 </div>

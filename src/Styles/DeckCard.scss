@@ -1,0 +1,84 @@
+@import '../Variables/Variables.scss';
+
+.deckCardContainer {
+  line-height: 44px;
+  height: 44px;
+  background-color: #232323;
+  border-radius: 50px 0px 0px 50px;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 0px;
+    right: 30px;
+    width: 150px;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.deckCardMana {
+  background: url(../assets/mana-icon.png) 0% 0% / 50px 44px no-repeat;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  width: 50px;
+  text-shadow: #000 2px 0 0, #000 1.75517px 0.95885px 0, #000 1.0806px 1.68294px 0, #000 0.14147px 1.99499px 0, #000 -0.83229px 1.81859px 0, #000 -1.60229px 1.19694px 0, #000 -1.97998px 0.28224px 0, #000 -1.87291px -0.70157px 0, #000 -1.30729px -1.5136px 0, #000 -0.42159px -1.95506px 0, #000 0.56732px -1.91785px 0, #000 1.41734px -1.41108px 0, #000 1.92034px -0.55883px 0;
+}
+
+.deckCardName {
+  @include deckCardTextStyle($white, 16px);
+  left: 60px;
+  max-width: 200px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.deckCardAmount {
+  @include deckCardTextStyle($yellow, 18px);
+  right: 10px;
+}
+
+.deckCardActions {
+  display: none;
+  position: absolute;
+  width: 100px;
+  height: 44px;
+  right: 30px;
+  background-color: #232323e4;
+  z-index: 1;
+}
+
+.deckCardAction {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  font-size: 35px;
+  color: $yellow;
+}
+
+.leftAction {
+  border-width: 0px 2px;
+  border-color: gray;
+  border-style: solid;
+}
+
+.rightAction {
+  border-right: 2px solid gray;
+}
+
+.deckCardAction:hover {
+  color: $white;
+}
+
+.deckCardContainer:hover {
+  border: 1px solid $yellow;
+}
+
+.deckCardContainer:hover .deckCardActions {
+  display: flex;
+}

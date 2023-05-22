@@ -7,7 +7,7 @@ import { useFilters } from '../hooks/useFilters'
 
 const SubFilters = () => {
   const { screenSize } = useResizeWindow()
-  const { setFilters, filters } = useFilters()
+  const { setFilter, filters } = useFilters()
   const { metadata } = useMetadata()
   const {
     types = [],
@@ -18,12 +18,7 @@ const SubFilters = () => {
   } = metadata
 
   const handleOnChange = (event, filter) => {
-    setFilters((prevState) => {
-      const newState = { ...prevState }
-      newState[filter] = event.target.value
-
-      return newState
-    })
+    setFilter(filter, event.target.value)
   }
 
   return screenSize === WINDOW_SIZES.LARGE || screenSize === WINDOW_SIZES.MEDIUM
