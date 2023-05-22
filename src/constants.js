@@ -124,4 +124,4 @@ export const HEROS_NAME = {
   warrior: 'Warrior'
 }
 
-export const ASSETS_PATH = import.meta.env.PROD ? '../assets/' : '../src/assets/'
+export const ASSETS_PATH = import.meta.env.VITE_PRODUCTION ? '../assets/' : '../src/assets/'
