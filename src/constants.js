@@ -123,5 +123,3 @@ export const HEROS_NAME = {
   warlock: 'Warlock',
   warrior: 'Warrior'
 }
-
-export const ASSETS_PATH = import.meta.env.PROD ? '../assets/' : '../src/assets/'

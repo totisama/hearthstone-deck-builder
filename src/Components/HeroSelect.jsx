@@ -4,8 +4,6 @@ import { HERO_CLASSES } from '../constants'
 import { useCards } from '../hooks/useCards'
 import { useFilters } from '../hooks/useFilters'
 
-const assetsPath = 'src/assets/classes/'
-
 const HeroSelect = () => {
   const { resetCards } = useCards(false)
   const { setFilter, removeAllFilters } = useFilters()
@@ -26,7 +24,7 @@ const HeroSelect = () => {
       <div className='heroSelection'>
         {HERO_CLASSES.map((hero) => (
           <button type='button' key={hero.id} className='heroButton' onClick={() => goToDeckbuilder(hero.value)}>
-            <img src={assetsPath + hero.image} alt={hero.name} />
+            <div className={`heroImage ${hero.value}Image`} />
             <div className='heroName'>
               <h4>{hero.name}</h4>
             </div>
