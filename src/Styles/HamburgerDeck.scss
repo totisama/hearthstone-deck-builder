@@ -1,34 +1,5 @@
 @import '../Variables/Variables.scss';
 
-.cardPackContainer {
-  width: 74px;
-  height: 105px;
-  position: sticky;
-  top: 30px;
-  margin: 10px 20px 0px 0px;
-  cursor: pointer;
-}
-
-.cardPack {
-  width: 74px;
-  height: 105px;
-  background-image: url(../assets/deckHamburger/cardpack.png);
-  background-repeat: no-repeat;
-}
-
-.cardPackIcon {
-  background-position: center center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 33px;
-  height: 33px;
-  position: absolute;
-  top: 6px;
-  left: 1px;
-  right: 0px;
-  margin: 0px auto;
-}
-
 .deckSizeValues {
   position: absolute;
   top: 51px;
