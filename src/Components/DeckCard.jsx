@@ -1,6 +1,9 @@
+import { useDeck } from '../hooks/useDeck'
 import '../Styles/DeckCard.scss'
 
-const DeckCard = ({ card, addedCardsAmount, addCard, removeCard }) => {
+const DeckCard = ({ card }) => {
+  const { addedCardsAmount, addCard, removeCard } = useDeck()
+
   return (
     <div className='deckCardContainer'>
       <span className='deckCardMana'>{card.manaCost}</span>

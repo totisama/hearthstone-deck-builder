@@ -2,16 +2,18 @@ import NoCards from './NoCards'
 import StatusBar from './StatusBar'
 import { InView } from 'react-intersection-observer'
 import { useCards } from '../hooks/useCards'
+import { useDeck } from '../hooks/useDeck'
 import '../Styles/DeckCards.scss'
 
-const DeckCards = ({
-  addCard,
-  addedCardsAmount,
-  isDeathKnigth,
-  cardAvailableToAdd
-}) => {
+const DeckCards = () => {
   const { cards, getNewCards } = useCards()
   const cardsEntries = Object.entries(cards)
+  const {
+    addCard,
+    addedCardsAmount,
+    isDeathKnigth,
+    cardAvailableToAdd
+  } = useDeck()
 
   const getCardAmountClasses = (cardId, cardRarity) => {
     let classes = 'cardAmount'

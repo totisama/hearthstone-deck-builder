@@ -1,6 +1,9 @@
 import '../Styles/RunesDisplay.scss'
+import { useDeck } from '../hooks/useDeck'
 
-const RunesDisplay = ({ currentRunesName }) => {
+const RunesDisplay = () => {
+  const { currentRunesName } = useDeck()
+
   const getRuneClass = (value) => {
     const className = `rune ${value}`
 
