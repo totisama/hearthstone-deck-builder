@@ -5,11 +5,9 @@ const cookies = new Cookies()
 
 export const getToken = async () => {
   const existingToken = cookies.get('token')
-  // console.log('existingToken', existingToken)
 
   if (existingToken) return existingToken
 
-  // console.log('pasa')
   const formData = new FormData()
 
   formData.append('grant_type', 'client_credentials')
@@ -21,7 +19,6 @@ export const getToken = async () => {
     body: formData
   })
   const token = await response.json()
-  // console.log(token)
 
   cookies.set('token', token.access_token, { path: '/', maxAge: token.expires_in })
 
@@ -39,7 +36,19 @@ export const getCards = async (queryParams, newPage = false, page = 1) => {
   const response = await fetch(`${API_HOST}/cards?${queryParams}`, { headers })
   const data = await response.json()
 
-  // console.log('data', data)
-
   return data
+}
+
+export const getDeckCodeCardsId = async (deckCardIds, heroId) => {
+  const token = await getToken()
+  const queryParams = new URLSearchParams({})
+
+  queryParams.append('ids', deckCardIds)
+  queryParams.append('hero', heroId)
+
+  const headers = { Authorization: `Bearer ${token}` }
+  const response = await fetch(`${API_HOST}/deck?${queryParams}`, { headers })
+  const data = await response.json()
+
+  return data.deckCode
 }

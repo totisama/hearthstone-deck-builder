@@ -4,11 +4,12 @@ import { FiltersContext } from '../Context/Filters'
 export const useFilters = () => {
   const {
     filters,
-    setFilters,
+    setFilter,
     showSubFilters,
     setShowSubFilters,
     page,
     setPage,
+    removeFilter,
     removeAllFilters
   } = useContext(FiltersContext)
 
@@ -25,9 +26,13 @@ export const useFilters = () => {
     return queryParams.toString()
   }
 
-  const getStatusFilters = () => {
+  const getStatusFilters = (deckBuilder = false) => {
     const notShownFilters = ['locale', 'set', 'pageSize', 'sort']
     const statusFilters = {}
+
+    if (deckBuilder) {
+      notShownFilters.push('class')
+    }
 
     Object.entries(filters).forEach(([key, value]) => {
       if (value !== '' && !notShownFilters.includes(key)) {
@@ -38,19 +43,9 @@ export const useFilters = () => {
     return statusFilters
   }
 
-  const removeFilter = (filterKey) => {
-    const newFilter = {}
-    newFilter[filterKey] = ''
-
-    setFilters(prevState => ({
-      ...prevState,
-      ...newFilter
-    }))
-  }
-
   return {
     filters,
-    setFilters,
+    setFilter,
     showSubFilters,
     setShowSubFilters,
     generateQueryParams,

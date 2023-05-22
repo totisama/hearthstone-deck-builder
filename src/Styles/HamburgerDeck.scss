@@ -1,0 +1,47 @@
+@import '../Variables/Variables.scss';
+
+.deckSizeValues {
+  position: absolute;
+  top: 51px;
+  left: 13px;
+  color: white;
+  font-family: $normalFont;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.hamburgerDeck {
+  width: 80%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.hamburgerCenter {
+  height: 70%;
+  background: url(../assets/deckListMiddle.png) center center / 100% repeat-y;
+  background-color: $purple;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 35px;
+  gap: 5px;
+  overflow-y: scroll;
+}
+
+.hamburgerClose {
+  position: absolute;
+  top: 0px;
+  left: -25px;
+  width: 70px;
+  height: 110%;
+  z-index: 3;
+  background: url(../src/assets/deckHamburger/close.png) center center / contain no-repeat;
+  border: 0px;
+  cursor: pointer;
+}
+
+.hamburgerTitleContainer {
+  @include titleContainerStyle(15px);
+}

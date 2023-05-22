@@ -40,7 +40,20 @@ export const useMetadata = () => {
     setClassesIdsValue(classesObject)
   }
 
+  const getClassIdByName = (className) => {
+    const classes = metadata.classes
+
+    const classObject = classes.filter((classObject) => classObject.slug === className)[0]
+
+    if (!classObject) {
+      // WIP: Add alert
+      throw new Error('Hero not found')
+    }
+
+    return classObject.cardId
+  }
+
   return {
-    metadata, loading, getMetadata, classesIdsValue
+    metadata, loading, getMetadata, classesIdsValue, getClassIdByName
   }
 }

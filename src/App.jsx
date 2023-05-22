@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import { useMetadata } from './hooks/useMetadata'
 import Loader from './Components/Loader'
 import { useEffect } from 'react'
-import InProgress from './Components/InProgress'
+import DeckBuilder from './Components/DeckBuilder'
 import HeroSelect from './Components/HeroSelect'
 
 function App () {
@@ -22,7 +22,7 @@ function App () {
         <Routes>
           <Route path='/' element={<Cards />} />
           <Route path='/deckbuilder' element={<HeroSelect />} />
-          <Route path='/deckbuilder/:id' element={<InProgress />} />
+          <Route path='/deckbuilder/:hero' element={<DeckBuilder />} />
         </Routes>
       </>
       )
