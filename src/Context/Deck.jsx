@@ -248,7 +248,8 @@ export const DeckProvider = ({ children }) => {
       setIsDeathKnigth,
       addCard,
       removeCard,
-      currentDeckSize
+      currentDeckSize,
+      cardAvailableToAdd
     }}
     >
       {children}

@@ -20,7 +20,8 @@ export const useDeck = (updateFilters = false) => {
     setIsDeathKnigth,
     addCard,
     currentDeckSize,
-    removeCard
+    removeCard,
+    cardAvailableToAdd
   } = useContext(DeckContext)
   const { getClassIdByName } = useMetadata()
   const [loading, setLoading] = useState(false)
@@ -77,6 +78,7 @@ export const useDeck = (updateFilters = false) => {
     setIsDeathKnigth,
     currentDeckSize,
     copyDeckCode,
+    cardAvailableToAdd,
     loading
   }
 }
